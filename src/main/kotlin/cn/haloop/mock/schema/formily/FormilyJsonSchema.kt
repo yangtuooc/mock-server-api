@@ -8,6 +8,12 @@ import cn.haloop.mock.schema.ExtendableJsonSchema
  */
 open class FormilyJsonSchema : ExtendableJsonSchema() {
 
+    private val componentProps = mutableMapOf<String, Any>()
+
+    init {
+        extend("x-component-props", componentProps)
+    }
+
     fun `x-component`(component: String): FormilyJsonSchema {
         extend("x-component", component)
         return this
@@ -17,4 +23,10 @@ open class FormilyJsonSchema : ExtendableJsonSchema() {
         extend("x-decorator", decorator)
         return this
     }
+
+    fun `x-placeholder`(placeholder: String): FormilyJsonSchema {
+        componentProps["placeholder"] = placeholder
+        return this
+    }
+
 }

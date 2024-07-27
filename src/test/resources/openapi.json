@@ -1,0 +1,309 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "form_aggregation_sdk API",
+    "description": "form_aggregation_sdk API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://form_aggregation_sdk"
+    }
+  ],
+  "tags": [
+    {
+      "name": "线索管理",
+      "description": "用于测试线索管理的接口，包含线索的生成、推送等功能"
+    }
+  ],
+  "paths": {
+    "/api/agg/update": {
+      "put": {
+        "summary": "更新线索",
+        "description": "更新指定的线索信息",
+        "operationId": "updateClue",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Clue"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClueCollectionResponseData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agg/random-push": {
+      "post": {
+        "summary": "生成随机线索并推送",
+        "description": "根据种子库生成随机的线索信息，并推送到指定的推送地址",
+        "operationId": "randomPush",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClueCollectionResponseData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agg/bulk-push": {
+      "post": {
+        "summary": "批量生成随机线索并推送",
+        "description": "根据种子库生成指定数量的随机的线索信息，并推送到指定的推送地址",
+        "operationId": "bulkRandomPush",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkRandomPush"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkPushResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agg/push": {
+      "post": {
+        "summary": "推送线索",
+        "description": "推送指定的线索信息到指定的推送地址",
+        "operationId": "push",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Clue"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClueCollectionResponseData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agg/ping": {
+      "get": {
+        "summary": "测试服务是否正常",
+        "description": "用于测试服务是否正常",
+        "operationId": "ping",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agg/random": {
+      "get": {
+        "summary": "生成随机线索",
+        "description": "根据种子库生成随机的线索信息",
+        "operationId": "random",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Clue"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Clue": {
+        "type": "object",
+        "properties": {
+          "clueId": {
+            "type": "string"
+          },
+          "realTimePush": {
+            "type": "boolean"
+          },
+          "specifiedAppCode": {
+            "type": "string"
+          },
+          "customerName": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "residentPlace": {
+            "type": "string"
+          },
+          "provinceCode": {
+            "type": "string"
+          },
+          "cityCode": {
+            "type": "string"
+          },
+          "areaCode": {
+            "type": "string"
+          },
+          "birthYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "birthMonth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "birthDay": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ageRange": {
+            "type": "string"
+          },
+          "previouslyInsured": {
+            "type": "string"
+          },
+          "consultingNeeds": {
+            "type": "string"
+          },
+          "insuranceBudget": {
+            "type": "string"
+          },
+          "personalAnnualIncome": {
+            "type": "string"
+          },
+          "familyAnnualIncome": {
+            "type": "string"
+          },
+          "authorizedOrganization": {
+            "type": "string"
+          },
+          "channelCode": {
+            "type": "string"
+          },
+          "subChannelCode": {
+            "type": "string"
+          },
+          "clueGrade": {
+            "type": "string"
+          },
+          "idCardNo": {
+            "type": "string"
+          },
+          "productCode": {
+            "type": "string"
+          },
+          "productVersion": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "useType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ext": {
+            "type": "object"
+          }
+        }
+      },
+      "ClueCollectionResponseData": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string"
+          },
+          "clueId": {
+            "type": "string"
+          }
+        }
+      },
+      "BulkRandomPush": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ignoreError": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BulkPushResult": {
+        "type": "object",
+        "properties": {
+          "successCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "failCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  }
+}

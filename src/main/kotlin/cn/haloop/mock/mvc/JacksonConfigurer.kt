@@ -22,6 +22,7 @@ class JacksonConfigurer {
     fun om(): ObjectMapper {
         val om = ObjectMapper()
         om.setSerializationInclusion(JsonInclude.Include.NON_NULL)
+        om.setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
 
         val sm = SimpleModule()
         sm.addSerializer(ExtendableJsonSchema::class.java, ExtendableJsonSchemaSerializer())

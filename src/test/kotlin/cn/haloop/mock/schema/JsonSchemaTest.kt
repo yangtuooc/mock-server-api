@@ -2,7 +2,6 @@ package cn.haloop.mock.schema
 
 import cn.haloop.mock.mvc.JacksonConfigurer
 import cn.haloop.mock.schema.formily.FormilyJsonSchema
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -52,6 +51,7 @@ class JsonSchemaTest {
         clueId.title("线索id")
         clueId.`x-component`("Input")
         clueId.`x-decorator`("FormItem")
+        clueId.`x-placeholder`("请输入线索id")
 
         val realTimePush = FormilyJsonSchema()
         realTimePush.type("boolean")
@@ -67,10 +67,11 @@ class JsonSchemaTest {
         )
 
         val expected = """
-            {"type":"object","properties":{"clueId":{"type":"string","title":"线索id","x-component":"Input","x-decorator":"FormItem"},"realTimePush":{"type":"boolean","title":"是否实时推送","x-component":"Switch","x-decorator":"FormItem"}}}
+            {"type":"object","properties":{"clueId":{"type":"string","title":"线索id","x-component-props":{"placeholder":"请输入线索id"},"x-component":"Input","x-decorator":"FormItem"},"realTimePush":{"type":"boolean","title":"是否实时推送","x-component":"Switch","x-decorator":"FormItem"}}}
         """.trimIndent()
 
         assertEquals(expected, om.writeValueAsString(jsonSchema))
+//        println(om.writeValueAsString(jsonSchema))
     }
 
 }

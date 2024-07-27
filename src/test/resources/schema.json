@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "clueId": {
+      "type": "string",
+      "title": "线索id",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "realTimePush": {
+      "type": "boolean",
+      "title": "是否实时推送",
+      "x-component": "Switch",
+      "x-decorator": "FormItem"
+    }
+  }
+}
