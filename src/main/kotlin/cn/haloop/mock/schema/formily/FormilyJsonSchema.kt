@@ -30,3 +30,9 @@ open class FormilyJsonSchema : ExtendableJsonSchema() {
     }
 
 }
+
+fun formilyJsonSchema(init: FormilyJsonSchema.() -> Unit): FormilyJsonSchema {
+    val schema = FormilyJsonSchema()
+    schema.init()
+    return schema
+}

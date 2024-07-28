@@ -1,9 +1,5 @@
 package cn.haloop.mock.schema
 
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.node.ObjectNode
-
 /**
  *  reference: https://json-this.org/specification-links#2020-12
  *
@@ -50,4 +46,10 @@ class SimpleJsonSchema : JsonSchema {
 
     override val entry: MutableMap<String, Any> = mutableMapOf()
 
+}
+
+fun jsonSchema(init: SimpleJsonSchema.() -> Unit): JsonSchema {
+    val schema = SimpleJsonSchema()
+    schema.init()
+    return schema
 }

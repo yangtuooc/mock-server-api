@@ -14,10 +14,10 @@ abstract class ExtendableJsonSchema : JsonSchema {
 
     override val entry: MutableMap<String, Any> = mutableMapOf()
 
-
     fun extend(key: String, value: Any): ExtendableJsonSchema {
         ext[key] = value
         return this
     }
 }
+
 
