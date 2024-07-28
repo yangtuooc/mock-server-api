@@ -1,7 +1,6 @@
 package cn.haloop.mock.domain
 
 import cn.haloop.mock.repository.converter.JsonNodeConverter
-import cn.haloop.mock.repository.converter.StringArrayConverter
 import com.fasterxml.jackson.databind.JsonNode
 import jakarta.persistence.Column
 import jakarta.persistence.Convert
@@ -32,10 +31,16 @@ open class SchemaDescription : AbstractAuditable() {
     open var app: Application? = null
 
     /**
-     * schema名称
+     * openAPI中的tag，用于分类
      */
-    @Column(name = "name")
-    open var name: String? = null
+    @Column(name = "tag")
+    open var tag: String? = null
+
+    /**
+     * openAPI中的summary, 用于描述接口
+     */
+    @Column(name = "summary")
+    open var summary: String? = null
 
     /**
      * schema描述
@@ -46,9 +51,8 @@ open class SchemaDescription : AbstractAuditable() {
     /**
      * schema 对应的接口路径
      */
-    @Column(name = "path_segments")
-    @Convert(converter = StringArrayConverter::class)
-    open var pathSegments: Array<String>? = null
+    @Column(name = "path")
+    open var path: String? = null
 
     /**
      * schema对应的接口请求方法
@@ -69,20 +73,6 @@ open class SchemaDescription : AbstractAuditable() {
     @Column(name = "response_schema")
     @Convert(converter = JsonNodeConverter::class)
     open var responseSchema: JsonNode? = null
-
-    /**
-     * 请求参数schema对应的ui schema
-     */
-    @Column(name = "request_ui_schema")
-    @Convert(converter = JsonNodeConverter::class)
-    open var requestUiSchema: JsonNode? = null
-
-    /**
-     * 响应参数schema对应的ui schema
-     */
-    @Column(name = "response_ui_schema")
-    @Convert(converter = JsonNodeConverter::class)
-    open var responseUiSchema: JsonNode? = null
 
     /**
      * 是否启用
