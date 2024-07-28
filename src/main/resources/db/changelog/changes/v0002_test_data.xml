@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+  <changeSet id="v0002_test_data" author="mawenhao">
+    <insert tableName="application">
+      <column name="id" value="e801a7de-a0c6-4370-a0fe-efb95e581ee4"/>
+      <column name="name" value="Test Application"/>
+      <column name="description" value="This is a test application"/>
+      <column name="endpoint" value="http://localhost:8080"/>
+      <column name="enabled" valueBoolean="true"/>
+      <column name="created_at" valueComputed="NOW()"/>
+      <column name="updated_at" valueComputed="NOW()"/>
+    </insert>
+  </changeSet>
+
+</databaseChangeLog>

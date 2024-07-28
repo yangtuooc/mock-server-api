@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+  <changeSet id="v0001_init" author="mawenhao">
+    <createTable tableName="application">
+      <column name="id" type="varchar(64)">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(128)" remarks="应用名称">
+        <constraints nullable="false"/>
+      </column>
+      <column name="endpoint" type="varchar(1000)" remarks="应用接入地址">
+        <constraints nullable="false"/>
+      </column>
+      <column name="description" type="text" remarks="应用描述">
+        <constraints nullable="true"/>
+      </column>
+      <column name="enabled" type="boolean" remarks="是否启用" defaultValueBoolean="false">
+        <constraints nullable="false"/>
+      </column>
+      <column name="created_at" type="timestamp" remarks="创建时间" defaultValueComputed="now()">
+        <constraints nullable="false"/>
+      </column>
+      <column name="updated_at" type="timestamp" remarks="更新时间" defaultValueComputed="now()">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    <createTable tableName="schema_description">
+      <column name="id" type="varchar(64)">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="app_id" type="varchar(64)" remarks="应用code">
+        <constraints nullable="false"/>
+      </column>
+      <column name="tag" type="varchar(128)" remarks="schema名称">
+        <constraints nullable="false"/>
+      </column>
+      <column name="summary" type="varchar(128)" remarks="schema摘要">
+        <constraints nullable="true"/>
+      </column>
+      <column name="description" type="text" remarks="schema描述">
+        <constraints nullable="true"/>
+      </column>
+      <column name="path" type="varchar(500)" remarks="接口路径">
+        <constraints nullable="true"/>
+      </column>
+      <column name="http_method" type="varchar(16)" remarks="http方法">
+        <constraints nullable="true"/>
+      </column>
+      <column name="request_schema" type="text" remarks="请求参数的json-schema">
+        <constraints nullable="true"/>
+      </column>
+      <column name="response_schema" type="text" remarks="响应参数的json-schema">
+        <constraints nullable="true"/>
+      </column>
+      <column name="enabled" type="boolean" remarks="是否启用" defaultValueBoolean="false">
+        <constraints nullable="false"/>
+      </column>
+      <column name="created_at" type="timestamp" remarks="创建时间" defaultValueComputed="now()">
+        <constraints nullable="false"/>
+      </column>
+      <column name="updated_at" type="timestamp" remarks="更新时间" defaultValueComputed="now()">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+</databaseChangeLog>

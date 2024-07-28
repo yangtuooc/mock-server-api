@@ -7,7 +7,7 @@ import java.util.*
  * @author yangtuo
  */
 @Entity
-@Table(name = "applications")
+@Table(name = "application")
 open class Application : AbstractAuditable() {
 
     @Id

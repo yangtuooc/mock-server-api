@@ -2,15 +2,8 @@ package cn.haloop.mock.domain
 
 import cn.haloop.mock.repository.converter.JsonNodeConverter
 import com.fasterxml.jackson.databind.JsonNode
-import jakarta.persistence.Column
-import jakarta.persistence.Convert
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.Table
-import org.springframework.http.HttpMethod
-import java.util.UUID
+import jakarta.persistence.*
+import java.util.*
 
 /**
  * schema描述
@@ -58,6 +51,7 @@ open class SchemaDescription : AbstractAuditable() {
      * schema对应的接口请求方法
      */
     @Column(name = "http_method")
+    @Enumerated(EnumType.STRING)
     open var httpMethod: HttpMethod? = null
 
     /**
