@@ -13,7 +13,7 @@ import jakarta.persistence.Converter
 @Converter
 class JsonNodeConverter : AttributeConverter<JsonNode, String> {
 
-    private val om = JacksonConfigurer().om()
+    private val om = ObjectMapper()
 
     override fun convertToDatabaseColumn(attribute: JsonNode?): String {
         return om.writeValueAsString(attribute)
