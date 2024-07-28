@@ -168,7 +168,9 @@
         "type": "object",
         "properties": {
           "clueId": {
-            "type": "string"
+            "type": "string",
+            "title": "线索ID",
+            "description": "线索ID"
           },
           "realTimePush": {
             "type": "boolean"
