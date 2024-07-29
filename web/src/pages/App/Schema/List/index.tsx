@@ -1,5 +1,5 @@
 import { ProCard } from '@ant-design/pro-components';
-import OpenApiSchemaList from '@/pages/App/Schema/components/OpenApiSchemaList';
+import OpenApiList from '@/pages/App/Schema/components/OpenApiSchemaList';
 
 type ApplicationSchemaListProps = {
   id: string;
@@ -13,12 +13,12 @@ const ApplicationSchemaList = () => {
         collapsible
         bordered
         headerBordered
-        title={'Schema列表'}
+        title={'API列表'}
         style={{
           marginBottom: 16,
         }}
       >
-        <OpenApiSchemaList />
+        <OpenApiList />
       </ProCard>
     </>
   );
