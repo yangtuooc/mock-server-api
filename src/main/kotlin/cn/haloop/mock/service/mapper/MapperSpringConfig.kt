@@ -6,5 +6,4 @@ import org.mapstruct.MapperConfig
  * @author yangtuo
  */
 @MapperConfig(componentModel = "spring")
-interface MapperSpringConfig {
-}
+interface MapperSpringConfig

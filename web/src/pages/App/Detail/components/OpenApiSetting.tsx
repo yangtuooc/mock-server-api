@@ -27,8 +27,9 @@ const OpenApiSetting: React.FC<OpenApiSettingProps> = ({ appId }) => {
     <>
       <ProCard
         title={'OpenAPI设置'}
-        headerBordered
+        collapsible
         bordered
+        headerBordered
         style={{
           marginBottom: 16,
         }}

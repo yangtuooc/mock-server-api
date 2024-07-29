@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getApplication } from '@/services/api/application';
 import { message } from 'antd';
 import OpenApiSetting from '@/pages/App/Detail/components/OpenApiSetting';
+import ApplicationSchemaList from '@/pages/App/Schema/List';
 
 const AppDetail = () => {
 
@@ -15,7 +16,7 @@ const AppDetail = () => {
 
   useEffect(() => {
     getApplication({ id: id }).then((data) => {
-      setAppView(data);
+      return setAppView(data);
     }).catch((e) => {
       return message.error('获取应用详情失败: ', e);
     });
@@ -26,6 +27,7 @@ const AppDetail = () => {
       <ApplicationDetailViewer dataSource={appView} />
       <OpenApiSetting appId={id} />
       {/*<ApplicationSchemaTable onLoad={onPaginationLoad} />*/}
+      <ApplicationSchemaList />
     </>
   );
 };
