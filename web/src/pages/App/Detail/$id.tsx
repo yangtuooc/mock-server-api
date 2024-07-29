@@ -3,6 +3,7 @@ import ApplicationDetailViewer from '@/pages/App/Detail/components/ApplicationDe
 import { useEffect, useState } from 'react';
 import { getApplication } from '@/services/api/application';
 import { message } from 'antd';
+import OpenApiSetting from '@/pages/App/Detail/components/OpenApiSetting';
 
 const AppDetail = () => {
 
@@ -23,8 +24,7 @@ const AppDetail = () => {
   return (
     <>
       <ApplicationDetailViewer dataSource={appView} />
-      <br />
-
+      <OpenApiSetting />
       {/*<ApplicationSchemaTable onLoad={onPaginationLoad} />*/}
     </>
   );

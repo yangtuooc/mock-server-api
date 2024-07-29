@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+  <changeSet id="v0003_open_api" author="mawenhao">
+    <createTable tableName="openapi_setting">
+      <column name="id" type="varchar(64)">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="app_id" type="varchar(64)" remarks="应用id">
+        <constraints nullable="false"/>
+      </column>
+      <column name="load_mode" type="varchar(8)" remarks="文档加载模式：URL/FILE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="url" type="varchar(1000)" remarks="接口文档地址">
+        <constraints nullable="false"/>
+      </column>
+      <column name="file" type="mediumtext" remarks="接口文档文件">
+        <constraints nullable="false"/>
+      </column>
+      <column name="cache" type="mediumtext" remarks="接口文档缓存">
+        <constraints nullable="false"/>
+      </column>
+      <column name="auto_update" type="boolean" remarks="自动更新" defaultValueBoolean="false">
+        <constraints nullable="false"/>
+      </column>
+      <column name="cron" type="varchar(64)" remarks="定时任务表达式">
+        <constraints nullable="true"/>
+      </column>
+      <column name="enabled" type="boolean" remarks="是否启用" defaultValueBoolean="true">
+        <constraints nullable="false"/>
+      </column>
+      <column name="created_at" type="timestamp" remarks="创建时间" defaultValueComputed="now()">
+        <constraints nullable="false"/>
+      </column>
+      <column name="updated_at" type="timestamp" remarks="更新时间" defaultValueComputed="now()">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+</databaseChangeLog>

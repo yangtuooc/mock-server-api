@@ -38,12 +38,16 @@ open class Application : AbstractAuditable() {
     open var enabled: Boolean = true
 
     /**
-     * 关联的schema 描述信息
+     * OpenAPI 设置
      */
-    @OneToMany(mappedBy = "app")
-    open var schemaDescriptions: MutableList<SchemaDescription> = ArrayList()
+    @OneToOne(mappedBy = "app", cascade = [CascadeType.ALL])
+    open var openapi: OpenApiSetting? = null
 
+    /**
+     * 切换状态: 启用/禁用
+     */
     fun switchStatus() {
         enabled = !enabled
     }
+
 }

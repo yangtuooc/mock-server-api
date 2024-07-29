@@ -10,7 +10,12 @@ type ApplicationDetailViewerProps = {
 const ApplicationDetailViewer: React.FC<ApplicationDetailViewerProps> = (props) => {
   const actionRef = useRef<ProDescriptionsActionType>();
   return (
-    <ProCard>
+    <ProCard
+      bordered
+      style={{
+        marginBottom: 16,
+      }}
+    >
       <ProDescriptions<API.ApplicationView>
         actionRef={actionRef}
         title={'应用详情'}
