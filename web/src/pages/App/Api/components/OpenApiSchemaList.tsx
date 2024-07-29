@@ -1,6 +1,8 @@
 import React from 'react';
 import { ProCard, ProList } from '@ant-design/pro-components';
 import { Button, Space, Tag } from 'antd';
+import { useNavigate } from '@umijs/max';
+import HttpMethodTag from '@/components/HttpMethod/HttpMethod';
 
 type OpenApiSchema = {
   id: string;
@@ -27,28 +29,28 @@ const tags: OpenApiTag[] = [
     description: '线索管理相关接口',
     schemas: [
       {
-        id: '1',
+        id: 'de9d1967-72de-457d-9c79-3f6d24676d34',
         name: '创建线索',
         method: 'POST',
         path: '/api/v1/leads',
         description: '提交一条用户信息到表单中台，返回线索ID',
       },
       {
-        id: '2',
+        id: 'de9d1967-72de-457d-9c79-3f6d24676d35',
         name: '更新线索',
         method: 'PUT',
         path: '/api/v1/leads/:id',
         description: '通过线索ID更新线索信息',
       },
       {
-        id: '3',
+        id: 'de9d1967-72de-457d-9c79-3f6d24676d36',
         name: '查看线索',
         method: 'GET',
         path: '/api/v1/leads/:id',
         description: '通过线索ID查看线索信息',
       },
       {
-        id: '4',
+        id: 'de9d1967-72de-457d-9c79-3f6d24676d37',
         name: '删除线索',
         method: 'DELETE',
         path: '/api/v1/leads/:id',
@@ -61,7 +63,7 @@ const tags: OpenApiTag[] = [
     description: '保单管理相关接口',
     schemas: [
       {
-        id: '3',
+        id: 'de9d1967-72de-457d-9c79-3f6d24676d38',
         name: '查看保单',
         method: 'GET',
         path: '/api/v1/policies/:id',
@@ -72,6 +74,9 @@ const tags: OpenApiTag[] = [
 ];
 
 const OpenApiSchemaList = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
       {
@@ -96,18 +101,7 @@ const OpenApiSchemaList = () => {
                         return (
                           <>
                             <Space size={0}>
-                              {record.method === 'GET' && (
-                                <Tag color="blue-inverse">GET</Tag>
-                              )}
-                              {record.method === 'POST' && (
-                                <Tag color="green-inverse">POST</Tag>
-                              )}
-                              {record.method === 'PUT' && (
-                                <Tag color="orange-inverse">PUT</Tag>
-                              )}
-                              {record.method === 'DELETE' && (
-                                <Tag color="red-inverse">DELETE</Tag>
-                              )}
+                              <HttpMethodTag method={record.method} />
                               <a>{record.path}</a>
                             </Space>
                           </>
@@ -119,7 +113,9 @@ const OpenApiSchemaList = () => {
                     },
                     actions: {
                       render: (text, record) => [
-                        <Button key="go" type="primary">Go</Button>,
+                        <Button key="go" type="primary" onClick={() => {
+                          navigate(`/schema/${record.id}`);
+                        }}>Go</Button>,
                       ],
                     },
                   }}

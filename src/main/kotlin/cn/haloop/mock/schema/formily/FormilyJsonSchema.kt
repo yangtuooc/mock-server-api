@@ -3,9 +3,9 @@ package cn.haloop.mock.schema.formily
 import io.swagger.v3.oas.models.media.Schema
 
 /**
- * FormilyJsonSchema 是阿里的 Formily 表单生成器的 JSON Schema 格式
+ * FormilyJsonSchema 是阿里的 Formily 表单生成器的 JSON Api 格式
  *
- * 基于 OpenAPI 3.0 的 Schema，并在此基础上进行了扩展，支持 Formily中的一些特性
+ * 基于 OpenAPI 3.0 的 Api，并在此基础上进行了扩展，支持 Formily中的一些特性
  * @author yangtuo
  */
 class FormilyJsonSchema(schema: Schema<*>) : Schema<Any>() {

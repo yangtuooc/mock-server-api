@@ -37,18 +37,22 @@ export default defineConfig({
       ],
     },
     {
-      name: '表单Schema',
+      name: '表单管理',
       path: '/schema',
       routes: [
         {
           name: '配置',
           path: '/schema/config',
-          component: './SchemaForm/Config',
+          component: './Form/Config',
         },
         {
           name: '列表',
           path: '/schema/list',
-          component: './SchemaForm/List',
+          component: './Form/List',
+        },
+        {
+          path: '/schema/:id',
+          component: './Form/Detail/$id',
         },
       ],
     },

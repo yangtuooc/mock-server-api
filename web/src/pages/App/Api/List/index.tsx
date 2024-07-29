@@ -1,5 +1,5 @@
 import { ProCard } from '@ant-design/pro-components';
-import OpenApiList from '@/pages/App/Schema/components/OpenApiSchemaList';
+import OpenApiList from '@/pages/App/Api/components/OpenApiSchemaList';
 
 type ApplicationSchemaListProps = {
   id: string;

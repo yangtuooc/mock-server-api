@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { getApplication } from '@/services/api/application';
 import { message } from 'antd';
 import OpenApiSetting from '@/pages/App/Detail/components/OpenApiSetting';
-import ApplicationApiList from '@/pages/App/Schema/List';
+import ApplicationApiList from '@/pages/App/Api/List';
 
 const AppDetail = () => {
 

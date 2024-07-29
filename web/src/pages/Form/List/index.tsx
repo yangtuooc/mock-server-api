@@ -2,7 +2,7 @@
 // import { findFormSchemaByPage, getFormSchema } from '@/services/api/formSchema';
 // import { useEffect, useState } from 'react';
 // import { Button, message, Space, Tag } from 'antd';
-// import ShowModal from '@/pages/SchemaForm/ShowModal';
+// import ShowModal from '@/pages/Form/ShowModal';
 //
 // const SchemaList = () => {
 //
