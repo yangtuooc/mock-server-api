@@ -19,6 +19,7 @@
     "@formily/antd-v5": "^1.2.2",
     "@formily/core": "^2.3.2",
     "@formily/react": "^2.3.2",
+    "@formily/reactive": "^2.3.2",
     "@umijs/max": "^4.3.10",
     "antd": "^5.19.3",
     "react-json-view": "^1.21.3"

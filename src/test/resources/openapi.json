@@ -169,101 +169,157 @@
         "properties": {
           "clueId": {
             "type": "string",
-            "title": "线索ID",
-            "description": "线索ID"
+            "title": "线索id",
+            "description": "线索id"
           },
           "realTimePush": {
-            "type": "boolean"
+            "type": "boolean",
+            "title": "是否实时推送",
+            "description": "是否实时推送，true表示实时推送，false表示非实时推送"
           },
           "specifiedAppCode": {
-            "type": "string"
+            "type": "string",
+            "title": "指定推送的appCode",
+            "description": "指定推送的appCode"
           },
           "customerName": {
-            "type": "string"
+            "type": "string",
+            "title": "客户姓名",
+            "description": "客户姓名"
           },
           "gender": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "title": "性别",
+            "description": "性别，1表示男，2表示女"
           },
           "phone": {
-            "type": "string"
+            "type": "string",
+            "title": "手机号",
+            "description": "手机号"
           },
           "residentPlace": {
-            "type": "string"
+            "type": "string",
+            "title": "居住地",
+            "description": "居住地"
           },
           "provinceCode": {
-            "type": "string"
+            "type": "string",
+            "title": "省份编码",
+            "description": "省份编码"
           },
           "cityCode": {
-            "type": "string"
+            "type": "string",
+            "title": "城市编码",
+            "description": "城市编码"
           },
           "areaCode": {
-            "type": "string"
+            "type": "string",
+            "title": "区县编码",
+            "description": "区县编码"
           },
           "birthYear": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "title": "出生年",
+            "description": "出生年"
           },
           "birthMonth": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "title": "出生月",
+            "description": "出生月"
           },
           "birthDay": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "title": "出生日",
+            "description": "出生日"
           },
           "age": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "title": "年龄",
+            "description": "年龄"
           },
           "ageRange": {
-            "type": "string"
+            "type": "string",
+            "title": "年龄段",
+            "description": "年龄段"
           },
           "previouslyInsured": {
-            "type": "string"
+            "type": "string",
+            "title": "是否有保险",
+            "description": "是否有保险"
           },
           "consultingNeeds": {
-            "type": "string"
+            "type": "string",
+            "title": "咨询需求",
+            "description": "咨询需求"
           },
           "insuranceBudget": {
-            "type": "string"
+            "type": "string",
+            "title": "保险预算",
+            "description": "保险预算"
           },
           "personalAnnualIncome": {
-            "type": "string"
+            "type": "string",
+            "title": "个人年收入",
+            "description": "个人年收入"
           },
           "familyAnnualIncome": {
-            "type": "string"
+            "type": "string",
+            "title": "家庭年收入",
+            "description": "家庭年收入"
           },
           "authorizedOrganization": {
-            "type": "string"
+            "type": "string",
+            "title": "授权机构",
+            "description": "授权机构"
           },
           "channelCode": {
-            "type": "string"
+            "type": "string",
+            "title": "渠道编码",
+            "description": "渠道编码"
           },
           "subChannelCode": {
-            "type": "string"
+            "type": "string",
+            "title": "子渠道编码",
+            "description": "子渠道编码"
           },
           "clueGrade": {
-            "type": "string"
+            "type": "string",
+            "title": "线索等级",
+            "description": "线索等级"
           },
           "idCardNo": {
-            "type": "string"
+            "type": "string",
+            "title": "身份证号",
+            "description": "身份证号"
           },
           "productCode": {
-            "type": "string"
+            "type": "string",
+            "title": "产品编码",
+            "description": "产品编码"
           },
           "productVersion": {
-            "type": "string"
+            "type": "string",
+            "title": "产品版本",
+            "description": "产品版本"
           },
           "tags": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "title": "标签",
+              "description": "标签"
             }
           },
           "useType": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "title": "使用类型",
+            "description": "使用类型，1 正式 2 测试"
           },
           "ext": {
             "type": "object"

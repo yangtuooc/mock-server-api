@@ -6,6 +6,7 @@ import HttpMethod from '@/components/HttpMethod/HttpMethod';
 import SchemaForm from '@/pages/Form/Detail/components/SchemaForm';
 import ReactJson from 'react-json-view';
 import MockSchemaForm from '@/pages/Form/Detail/components/MockSchemaForm';
+import { mockClueFormSchema } from '@/mock/mockClueFormSchema';
 
 const dataSource = {
   name: '线索创建',
@@ -14,23 +15,7 @@ const dataSource = {
   description: '提交一条用户信息，返回线索id',
 };
 
-const schema: any = {
-  'type': 'object',
-  'properties': {
-    'clueId': {
-      'type': 'string',
-      'title': '线索id',
-      'x-component': 'Input',
-      'x-decorator': 'FormItem',
-    },
-    'realTimePush': {
-      'type': 'boolean',
-      'title': '是否实时推送',
-      'x-component': 'Switch',
-      'x-decorator': 'FormItem',
-    },
-  },
-};
+const schema = mockClueFormSchema;
 
 type ApiSchemaDetailProps = {
   jsonSchema: any,

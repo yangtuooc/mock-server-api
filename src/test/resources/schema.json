@@ -3,15 +3,218 @@
   "properties": {
     "clueId": {
       "type": "string",
+      "description": "线索id",
       "title": "线索id",
       "x-component": "Input",
       "x-decorator": "FormItem"
     },
     "realTimePush": {
       "type": "boolean",
+      "description": "是否实时推送，true表示实时推送，false表示非实时推送",
       "title": "是否实时推送",
       "x-component": "Switch",
       "x-decorator": "FormItem"
+    },
+    "specifiedAppCode": {
+      "type": "string",
+      "description": "指定推送的appCode",
+      "title": "指定推送的appCode",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "customerName": {
+      "type": "string",
+      "description": "客户姓名",
+      "title": "客户姓名",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "gender": {
+      "type": "integer",
+      "format": "int32",
+      "description": "性别，1表示男，2表示女",
+      "title": "性别",
+      "x-component": "InputNumber",
+      "x-decorator": "FormItem"
+    },
+    "phone": {
+      "type": "string",
+      "description": "手机号",
+      "title": "手机号",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "residentPlace": {
+      "type": "string",
+      "description": "居住地",
+      "title": "居住地",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "provinceCode": {
+      "type": "string",
+      "description": "省份编码",
+      "title": "省份编码",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "cityCode": {
+      "type": "string",
+      "description": "城市编码",
+      "title": "城市编码",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "areaCode": {
+      "type": "string",
+      "description": "区县编码",
+      "title": "区县编码",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "birthYear": {
+      "type": "integer",
+      "format": "int32",
+      "description": "出生年",
+      "title": "出生年",
+      "x-component": "InputNumber",
+      "x-decorator": "FormItem"
+    },
+    "birthMonth": {
+      "type": "integer",
+      "format": "int32",
+      "description": "出生月",
+      "title": "出生月",
+      "x-component": "InputNumber",
+      "x-decorator": "FormItem"
+    },
+    "birthDay": {
+      "type": "integer",
+      "format": "int32",
+      "description": "出生日",
+      "title": "出生日",
+      "x-component": "InputNumber",
+      "x-decorator": "FormItem"
+    },
+    "age": {
+      "type": "integer",
+      "format": "int32",
+      "description": "年龄",
+      "title": "年龄",
+      "x-component": "InputNumber",
+      "x-decorator": "FormItem"
+    },
+    "ageRange": {
+      "type": "string",
+      "description": "年龄段",
+      "title": "年龄段",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "previouslyInsured": {
+      "type": "string",
+      "description": "是否有保险",
+      "title": "是否有保险",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "consultingNeeds": {
+      "type": "string",
+      "description": "咨询需求",
+      "title": "咨询需求",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "insuranceBudget": {
+      "type": "string",
+      "description": "保险预算",
+      "title": "保险预算",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "personalAnnualIncome": {
+      "type": "string",
+      "description": "个人年收入",
+      "title": "个人年收入",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "familyAnnualIncome": {
+      "type": "string",
+      "description": "家庭年收入",
+      "title": "家庭年收入",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "authorizedOrganization": {
+      "type": "string",
+      "description": "授权机构",
+      "title": "授权机构",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "channelCode": {
+      "type": "string",
+      "description": "渠道编码",
+      "title": "渠道编码",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "subChannelCode": {
+      "type": "string",
+      "description": "子渠道编码",
+      "title": "子渠道编码",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "clueGrade": {
+      "type": "string",
+      "description": "线索等级",
+      "title": "线索等级",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "idCardNo": {
+      "type": "string",
+      "description": "身份证号",
+      "title": "身份证号",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "productCode": {
+      "type": "string",
+      "description": "产品编码",
+      "title": "产品编码",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "productVersion": {
+      "type": "string",
+      "description": "产品版本",
+      "title": "产品版本",
+      "x-component": "Input",
+      "x-decorator": "FormItem"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "标签",
+        "title": "标签"
+      },
+      "x-component": "ArrayTable",
+      "x-decorator": "FormItem"
+    },
+    "useType": {
+      "type": "integer",
+      "format": "int32",
+      "description": "使用类型，1 正式 2 测试",
+      "title": "使用类型",
+      "x-component": "InputNumber",
+      "x-decorator": "FormItem"
+    },
+    "ext": {
+      "type": "object"
     }
   }
 }
