@@ -1,9 +1,10 @@
 import { ProCard, ProDescriptions } from '@ant-design/pro-components';
-import { Button, Drawer } from 'antd';
+import { Button } from 'antd';
 import React, { useState } from 'react';
 import { useParams } from '@@/exports';
 import HttpMethod from '@/components/HttpMethod/HttpMethod';
 import SchemaForm from '@/pages/Form/Detail/components/SchemaForm';
+import ReactJson from 'react-json-view';
 
 const dataSource = {
   name: '线索创建',
@@ -12,7 +13,7 @@ const dataSource = {
   description: '提交一条用户信息，返回线索id',
 };
 
-const schema = {
+const schema: any = {
   'type': 'object',
   'properties': {
     'clueId': {
@@ -30,10 +31,16 @@ const schema = {
   },
 };
 
+type ApiSchemaDetailProps = {
+  jsonSchema: any,
+  mockConfig: any,
+}
+
 const ApiSchemaDetail = () => {
 
   const { id } = useParams();
   const [showSchema, setShowSchema] = useState(false);
+  const [usedSchema, setUsedSchema] = useState(schema);
 
   return (
     <>
@@ -71,30 +78,18 @@ const ApiSchemaDetail = () => {
           <ProDescriptions.Item label={'描述'} dataIndex={'description'} />
         </ProDescriptions>
       </ProCard>
-      <ProCard
-        bordered
-        headerBordered
-        title={'表单信息'}
-        extra={
-          <Button type={'primary'} onClick={() => {
-            setShowSchema(!showSchema);
-          }}>
-            查看Schema
-          </Button>
-        }
-      >
-
-        <SchemaForm jsonSchema={schema} />
-
-        {/* schema view */}
-        <Drawer
-          open={showSchema}
-          onClose={() => {
-            setShowSchema(!showSchema);
-          }}
-          getContainer={false}
-        >
-        </Drawer>
+      <ProCard tabs={{ type: 'card' }}>
+        <ProCard.TabPane key={'schemaForm'} tab={'表单信息'}>
+          <SchemaForm jsonSchema={usedSchema} />
+        </ProCard.TabPane>
+        <ProCard.TabPane key={'mockConfig'} tab={'mock数据配置'}>
+          mock数据配置
+        </ProCard.TabPane>
+        <ProCard.TabPane key={'jsonSchema'} tab={'jsonSchema'}>
+          <ReactJson src={schema} onEdit={(edit) => {
+            setUsedSchema(edit.updated_src);
+          }} />
+        </ProCard.TabPane>
       </ProCard>
     </>
   );
