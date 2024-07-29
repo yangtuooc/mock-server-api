@@ -1,15 +1,4 @@
 declare namespace API {
-  type Application = {
-    createdAt?: string;
-    updatedAt?: string;
-    id: string;
-    name?: string;
-    endpoint?: string;
-    description?: string;
-    enabled: boolean;
-    schemaDescriptions: SchemaDescription[];
-  };
-
   type ApplicationCreate = {
     /** 应用名称 */
     name: string;
@@ -47,8 +36,6 @@ declare namespace API {
 
   type HttpMethod = true;
 
-  type JsonNode = true;
-
   type Pageable = {
     page?: number;
     size?: number;
@@ -71,8 +58,8 @@ declare namespace API {
     content?: ApplicationView[];
     number?: number;
     sort?: SortObject[];
-    pageable?: PageableObject;
     numberOfElements?: number;
+    pageable?: PageableObject;
     first?: boolean;
     last?: boolean;
     empty?: boolean;
@@ -85,26 +72,11 @@ declare namespace API {
     content?: SchemaView[];
     number?: number;
     sort?: SortObject[];
-    pageable?: PageableObject;
     numberOfElements?: number;
+    pageable?: PageableObject;
     first?: boolean;
     last?: boolean;
     empty?: boolean;
-  };
-
-  type SchemaDescription = {
-    createdAt?: string;
-    updatedAt?: string;
-    id: string;
-    app?: Application;
-    tag?: string;
-    summary?: string;
-    description?: string;
-    path?: string;
-    httpMethod?: 'GET' | 'POST' | 'PUT' | 'DELETE';
-    requestSchema?: JsonNode;
-    responseSchema?: JsonNode;
-    enabled: boolean;
   };
 
   type SchemaView = {
@@ -130,6 +102,7 @@ declare namespace API {
   };
 
   type switchStatusParams = {
-    id: Application;
+    /** 应用ID */
+    id: any;
   };
 }

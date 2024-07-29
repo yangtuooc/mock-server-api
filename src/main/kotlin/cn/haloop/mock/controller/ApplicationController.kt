@@ -6,18 +6,14 @@ import cn.haloop.mock.domain.projection.ApplicationView
 import cn.haloop.mock.domain.projection.SchemaView
 import cn.haloop.mock.service.ApplicationService
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.enums.ParameterIn
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import java.util.UUID
+import org.springframework.web.bind.annotation.*
 
 /**
  * @author yangtuo
@@ -56,8 +52,17 @@ class ApplicationController(val svc: ApplicationService) {
         summary = "切换应用状态",
         description = "切换应用状态: 启用/禁用"
     )
+    @Parameter(
+        name = "id",
+        description = "应用ID",
+        required = true,
+        `in` = ParameterIn.PATH,
+        example = "123e4567-e89b-12d3-a456-426614174000"
+    )
     @PostMapping("/{id}/switch-status")
-    fun switchStatus(@PathVariable("id") app: Application): ResponseEntity<Void> {
+    fun switchStatus(
+        @Parameter(hidden = true) @PathVariable("id") app: Application
+    ): ResponseEntity<Void> {
         svc.switchStatus(app)
         return ResponseEntity.ok().build()
     }
@@ -68,7 +73,7 @@ class ApplicationController(val svc: ApplicationService) {
         description = "获取应用详情"
     )
     @GetMapping("/{id}")
-    fun getApplication(@PathVariable("id") id: UUID): ResponseEntity<ApplicationView> {
+    fun getApplication(@PathVariable("id") id: String): ResponseEntity<ApplicationView> {
         return ResponseEntity.ok(svc.getApplication(id))
     }
 
@@ -79,7 +84,7 @@ class ApplicationController(val svc: ApplicationService) {
     )
     @GetMapping("/{id}/schemas")
     fun findApplicationSchemas(
-        @PathVariable("id") id: UUID,
+        @PathVariable("id") id: String,
         pageable: Pageable
     ): ResponseEntity<Page<SchemaView>> {
         return ResponseEntity.ok(svc.findApplicationSchemas(id, pageable))

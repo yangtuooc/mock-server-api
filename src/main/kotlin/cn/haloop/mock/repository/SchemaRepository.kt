@@ -8,16 +8,15 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
-import java.util.UUID
 
 /**
  * @author yangtuo
  */
 @Repository
-interface SchemaRepository : JpaRepository<SchemaDescription, UUID> {
+interface SchemaRepository : JpaRepository<SchemaDescription, String> {
 
 
     @Query("select s from SchemaDescription s where s.app.id = :appId")
-    fun findSchemasByAppId(@Param("appId") appId: UUID, pageable: Pageable): Page<SchemaView>
+    fun findSchemasByAppId(@Param("appId") appId: String, pageable: Pageable): Page<SchemaView>
 
 }

@@ -14,7 +14,7 @@ import java.util.*
 open class SchemaDescription : AbstractAuditable() {
 
     @Id
-    open var id: UUID = UUID.randomUUID()
+    open var id: String = UUID.randomUUID().toString()
 
     /**
      * 关联的应用id

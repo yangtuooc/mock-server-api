@@ -12,11 +12,11 @@ import java.util.UUID
  * @author yangtuo
  */
 @Repository
-interface ApplicationRepository : JpaRepository<Application, UUID> {
+interface ApplicationRepository : JpaRepository<Application, String> {
 
     fun findAllBy(pageable: Pageable): Page<ApplicationView>
 
-    fun getApplicationById(id: UUID): ApplicationView
+    fun getApplicationById(id: String): ApplicationView
 }
 
 

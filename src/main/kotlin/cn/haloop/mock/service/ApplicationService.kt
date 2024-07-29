@@ -10,7 +10,6 @@ import jakarta.transaction.Transactional
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import java.util.*
 
 /**
  * @author yangtuo
@@ -39,11 +38,11 @@ class ApplicationService(
         app.switchStatus()
     }
 
-    fun getApplication(id: UUID): ApplicationView {
+    fun getApplication(id: String): ApplicationView {
         return appRepository.getApplicationById(id)
     }
 
-    fun findApplicationSchemas(id: UUID, pageable: Pageable): Page<SchemaView> {
+    fun findApplicationSchemas(id: String, pageable: Pageable): Page<SchemaView> {
         return schemaRepository.findSchemasByAppId(id, pageable)
     }
 }
