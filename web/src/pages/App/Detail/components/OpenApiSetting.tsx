@@ -1,12 +1,5 @@
-import {
-  ProCard,
-  ProForm,
-  ProFormInstance,
-  ProFormRadio,
-  ProFormText,
-  ProFormUploadDragger,
-} from '@ant-design/pro-components';
-import React, { useRef, useState } from 'react';
+import { ProCard, ProForm, ProFormRadio, ProFormText, ProFormUploadDragger } from '@ant-design/pro-components';
+import React, { useState } from 'react';
 import { Button, message } from 'antd';
 import { findOpenApiSetting, setOpenApi } from '@/services/api/application';
 
