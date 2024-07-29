@@ -56,6 +56,17 @@ export default defineConfig({
         },
       ],
     },
+    {
+      name: '数据管理',
+      path: '/mock',
+      routes: [
+        {
+          name: 'mock数据池',
+          path: '/mock/pool',
+          component: './Mock/Pool',
+        },
+      ],
+    },
   ],
   plugins: ['@umijs/max-plugin-openapi'],
   openAPI: [
