@@ -1,6 +1,7 @@
 import { createSchemaField, FormProvider } from '@formily/react';
 import { FormButtonGroup, FormItem, Reset, Select, Submit } from '@formily/antd-v5';
 import { createForm } from '@formily/core';
+import { useState } from 'react';
 
 type MockSchemaFormProps = {
   jsonSchema: any
@@ -13,6 +14,7 @@ const jsonSchema: any = {
     'clueId': {
       'type': 'string',
       'title': '线索id',
+      'required': true,
       'x-component': 'Select',
       'x-decorator': 'FormItem',
       'enum': [
@@ -23,6 +25,7 @@ const jsonSchema: any = {
     'realTimePush': {
       'type': 'boolean',
       'title': '是否实时推送',
+      'required': true,
       'x-component': 'Select',
       'x-decorator': 'FormItem',
       'enum': [
@@ -45,19 +48,27 @@ const submitForm = (values) => {
   console.log('submit form', values);
 };
 
+
 const MockSchemaForm = () => {
 
-  const form = createForm({
-    initialValues: {
+  const [options, setOptions] = useState({});
+
+  const inferConfigItems = () => {
+    setOptions({
       clueId: 'uuid',
       realTimePush: 'random',
-    },
+    });
+  };
+
+  const form = createForm({
+    values: options,
   });
 
   return (
     <FormProvider form={form}>
       <SchemaField schema={jsonSchema} />
       <FormButtonGroup align={'center'}>
+        <Submit ghost onSubmit={inferConfigItems}>自动匹配</Submit>
         <Submit onSubmit={submitForm}>提交</Submit>
         <Reset>重置</Reset>
       </FormButtonGroup>
