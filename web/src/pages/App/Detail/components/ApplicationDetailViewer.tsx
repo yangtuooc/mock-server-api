@@ -3,7 +3,7 @@ import { ProCard, ProDescriptions, ProDescriptionsActionType } from '@ant-design
 import { Button, Tag } from 'antd';
 
 type ApplicationDetailViewerProps = {
-  dataSource: API.ApplicationDetailView;
+  dataSource: API.ApplicationView;
 };
 
 
@@ -11,7 +11,7 @@ const ApplicationDetailViewer: React.FC<ApplicationDetailViewerProps> = (props) 
   const actionRef = useRef<ProDescriptionsActionType>();
   return (
     <ProCard>
-      <ProDescriptions<API.ApplicationDetailView>
+      <ProDescriptions<API.ApplicationView>
         actionRef={actionRef}
         title={'应用详情'}
         dataSource={props.dataSource}
@@ -37,7 +37,6 @@ const ApplicationDetailViewer: React.FC<ApplicationDetailViewerProps> = (props) 
           (endpoint: string) => <a href={endpoint} target={'_blank'}>{endpoint}</a>
         } />
         <ProDescriptions.Item label={'创建时间'} dataIndex={'createdAt'} valueType={'dateTime'} />
-        <ProDescriptions.Item label={'更新时间'} dataIndex={'updatedAt'} valueType={'dateTime'} />
         <ProDescriptions.Item label={'描述'} dataIndex={'description'} />
       </ProDescriptions>
     </ProCard>
