@@ -1,12 +1,12 @@
 import { ProCard } from '@ant-design/pro-components';
-import OpenApiList from '@/pages/App/Api/components/OpenApiSchemaList';
+import OpenApiList from '@/pages/App/Api/components/OpenApiList';
 
 type ApplicationSchemaListProps = {
   id: string;
 };
 
 
-const ApplicationSchemaList = () => {
+const ApplicationApiList = () => {
   return (
     <>
       <ProCard
@@ -24,4 +24,4 @@ const ApplicationSchemaList = () => {
   );
 };
 
-export default ApplicationSchemaList;
+export default ApplicationApiList;

@@ -2,6 +2,7 @@ import { createSchemaField, FormProvider } from '@formily/react';
 import { FormButtonGroup, FormItem, Reset, Select, Submit } from '@formily/antd-v5';
 import { createForm } from '@formily/core';
 import { useState } from 'react';
+import { Button } from 'antd';
 
 type MockSchemaFormProps = {
   jsonSchema: any
@@ -68,7 +69,7 @@ const MockSchemaForm = () => {
     <FormProvider form={form}>
       <SchemaField schema={jsonSchema} />
       <FormButtonGroup align={'center'}>
-        <Submit ghost onSubmit={inferConfigItems}>自动匹配</Submit>
+        <Button onClick={inferConfigItems}>自动匹配</Button>
         <Submit onSubmit={submitForm}>提交</Submit>
         <Reset>重置</Reset>
       </FormButtonGroup>

@@ -4,7 +4,7 @@ import { Button, Space, Tag } from 'antd';
 import { useNavigate } from '@umijs/max';
 import HttpMethodTag from '@/components/HttpMethod/HttpMethod';
 
-type OpenApiSchema = {
+type OpenApiDescription = {
   id: string;
   name: string;
   method: string;
@@ -15,12 +15,12 @@ type OpenApiSchema = {
 type OpenApiTag = {
   name: string;
   description?: string;
-  schemas: OpenApiSchema[];
+  schemas: OpenApiDescription[];
 }
 
 
 type OpenApiSchemaListProps = {
-  schemas: OpenApiSchema[];
+  schemas: OpenApiDescription[];
 }
 
 const tags: OpenApiTag[] = [
@@ -73,7 +73,7 @@ const tags: OpenApiTag[] = [
   },
 ];
 
-const OpenApiSchemaList = () => {
+const OpenApiList = () => {
 
   const navigate = useNavigate();
 
@@ -89,7 +89,7 @@ const OpenApiSchemaList = () => {
                      ghost={false}
             >
               {
-                <ProList<OpenApiSchema>
+                <ProList<OpenApiDescription>
                   rowKey={'id'}
                   dataSource={tag.schemas}
                   metas={{
@@ -129,4 +129,4 @@ const OpenApiSchemaList = () => {
   );
 };
 
-export default OpenApiSchemaList;
+export default OpenApiList;
