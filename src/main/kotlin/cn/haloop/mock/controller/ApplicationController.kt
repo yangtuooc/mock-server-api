@@ -38,6 +38,7 @@ class ApplicationController(val svc: ApplicationService) {
         return ResponseEntity.status(HttpStatus.CREATED).build()
     }
 
+
     @Operation(
         operationId = "findApplications",
         summary = "查询应用",
@@ -47,6 +48,7 @@ class ApplicationController(val svc: ApplicationService) {
     fun findApplications(pageable: Pageable): ResponseEntity<Page<ApplicationView>> {
         return ResponseEntity.ok(svc.findApplications(pageable))
     }
+
 
     @Operation(
         operationId = "switchStatus",
@@ -68,6 +70,7 @@ class ApplicationController(val svc: ApplicationService) {
         return ResponseEntity.ok().build()
     }
 
+
     @Operation(
         operationId = "getApplication",
         summary = "获取应用",
@@ -77,6 +80,7 @@ class ApplicationController(val svc: ApplicationService) {
     fun getApplication(@PathVariable("id") id: String): ResponseEntity<ApplicationView> {
         return ResponseEntity.ok(svc.getApplication(id))
     }
+
 
     @Operation(
         operationId = "findApplicationSchemas",
@@ -90,6 +94,7 @@ class ApplicationController(val svc: ApplicationService) {
     ): ResponseEntity<Page<SchemaView>> {
         return ResponseEntity.ok(svc.findApplicationSchemas(id, pageable))
     }
+
 
     @Operation(
         operationId = "setOpenApi",
@@ -112,6 +117,7 @@ class ApplicationController(val svc: ApplicationService) {
         return ResponseEntity.status(HttpStatus.CREATED).build()
     }
 
+
     @Operation(
         operationId = "findOpenApiSetting",
         summary = "查询OpenAPI配置",
@@ -121,4 +127,6 @@ class ApplicationController(val svc: ApplicationService) {
     fun findOpenApiSetting(@PathVariable("id") id: String): ResponseEntity<OpenApiSettingEdit> {
         return ResponseEntity.ok(svc.findOpenApiSetting(id))
     }
+
+
 }
