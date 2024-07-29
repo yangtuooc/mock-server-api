@@ -30,7 +30,7 @@ const ApplicationDetailViewer: React.FC<ApplicationDetailViewerProps> = (props) 
           </Button>
         }
       >
-        <ProDescriptions.Item label={'应用code'} dataIndex={'code'} />
+        <ProDescriptions.Item label={'应用id'} dataIndex={'id'} />
         <ProDescriptions.Item label={'应用名称'} dataIndex={'name'} />
         <ProDescriptions.Item label={'状态'} dataIndex={'enabled'}
                               render={

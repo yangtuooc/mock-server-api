@@ -1,5 +1,12 @@
-import { ProCard, ProForm, ProFormRadio, ProFormText, ProFormUploadDragger } from '@ant-design/pro-components';
-import React, { useEffect, useState } from 'react';
+import {
+  ProCard,
+  ProForm,
+  ProFormInstance,
+  ProFormRadio,
+  ProFormText,
+  ProFormUploadDragger,
+} from '@ant-design/pro-components';
+import React, { useRef, useState } from 'react';
 import { Button, message } from 'antd';
 import { findOpenApiSetting, setOpenApi } from '@/services/api/application';
 
@@ -8,32 +15,20 @@ type OpenApiSettingProps = {
   appId: string;
 }
 
-const handleFinish = async (appId: string, values: API.OpenApiSettingEdit) => {
-  setOpenApi({ id: appId }, values).then(() => {
-    return message.success('设置成功');
-  }).catch((err) => {
-    return message.error('设置失败: ', err);
-  });
-};
-
-
 const OpenApiSetting: React.FC<OpenApiSettingProps> = ({ appId }) => {
-
-  useEffect(() => {
-    findOpenApiSetting({ id: appId }).then((data) => {
-      if (!data) {
-        setEditMode(true);
-      }
-      setInitialValues(data);
-    }).catch((err) => {
-      return message.error('获取OpenAPI设置失败: ', err);
-    });
-  }, [appId]);
 
   const [schemaMode, setSchemaMode] = useState('endpoint');
   const [editMode, setEditMode] = useState(false);
   const [autoUpdate, setAutoUpdate] = useState(false);
-  const [initialValues, setInitialValues] = useState<API.OpenApiSettingEdit>(null);
+
+  const handleFinish = async (appId: string, values: API.OpenApiSettingEdit) => {
+    setOpenApi({ id: appId }, values).then(() => {
+      setEditMode(false);
+      return message.success('设置成功');
+    }).catch((err) => {
+      return message.error('设置失败: ', err);
+    });
+  };
 
   return (
     <>
@@ -61,10 +56,17 @@ const OpenApiSetting: React.FC<OpenApiSettingProps> = ({ appId }) => {
           }}
           autoFocusFirstInput
           disabled={!editMode}
-          initialValues={initialValues}
+          request={async () => {
+            const res = await findOpenApiSetting({ id: appId });
+            if (res) {
+              return res;
+            }
+            setEditMode(true);
+            return {};
+          }}
         >
           <ProFormRadio.Group
-            name="schemaType"
+            name="loadModel"
             label="请选择添加OpenAPI接口文档的方式"
             radioType={'button'}
             rules={[{ required: true, message: '请选择OpenAPI Schema的设置方式' }]}

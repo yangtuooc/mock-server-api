@@ -29,7 +29,7 @@ const AppList = () => {
   };
 
   return (
-    <ProTable<API.PageApplicationView, API.Pageable>
+    <ProTable<API.ApplicationView, API.Pageable>
       actionRef={actionRef}
       headerTitle={'应用列表'}
       request={pageRequest}
