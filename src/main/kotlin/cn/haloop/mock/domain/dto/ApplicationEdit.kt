@@ -8,10 +8,10 @@ import jakarta.validation.constraints.NotBlank
  * @author yangtuo
  */
 @Schema(
-    name = "ApplicationCreate",
+    name = "ApplicationEdit",
     description = "创建应用"
 )
-class ApplicationCreate {
+class ApplicationEdit {
 
     @NotBlank(message = "应用名称不能为空")
     @Schema(name = "name", description = "应用名称", requiredMode = REQUIRED, example = "appName")

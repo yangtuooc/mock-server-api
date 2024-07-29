@@ -1,15 +1,9 @@
 package cn.haloop.mock.schema.formily
 
-import cn.haloop.mock.mvc.JacksonConfigurer
-import com.fasterxml.jackson.core.JsonGenerator
-import com.fasterxml.jackson.databind.SerializerProvider
-import com.fasterxml.jackson.databind.module.SimpleModule
-import com.fasterxml.jackson.databind.ser.std.StdSerializer
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.swagger.v3.core.util.Json31
 import io.swagger.v3.core.util.OpenAPISchema2JsonSchema
 import io.swagger.v3.oas.models.OpenAPI
-import io.swagger.v3.oas.models.media.Schema
-import org.hibernate.sql.results.internal.RowTransformerListImpl
 import org.junit.jupiter.api.Test
 
 /**
@@ -17,7 +11,7 @@ import org.junit.jupiter.api.Test
  */
 class FormilyJsonSchemaTest {
 
-    private val om = JacksonConfigurer().om()
+    private val om = ObjectMapper()
 
 
     @Test

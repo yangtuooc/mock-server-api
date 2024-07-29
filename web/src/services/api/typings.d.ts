@@ -1,5 +1,5 @@
 declare namespace API {
-  type ApplicationCreate = {
+  type ApplicationEdit = {
     /** 应用名称 */
     name: string;
     /** 应用描述 */
@@ -30,11 +30,27 @@ declare namespace API {
     pageable: Pageable;
   };
 
+  type findOpenApiSettingParams = {
+    id: string;
+  };
+
   type getApplicationParams = {
     id: string;
   };
 
-  type HttpMethod = true;
+  type JsonNode = true;
+
+  type OpenApiSettingEdit = {
+    /** 加载模式 URL: 从URL加载, FILE: 从文件加载 */
+    loadMode: 'FILE' | 'URL';
+    /** URL URL加载模式下的URL */
+    url?: string;
+    file?: JsonNode;
+    /** 自动更新 是否自动更新 */
+    autoUpdate: boolean;
+    /** CRON表达式 CRON表达式 */
+    cron?: string;
+  };
 
   type Pageable = {
     page?: number;
@@ -42,63 +58,21 @@ declare namespace API {
     sort?: string[];
   };
 
-  type PageableObject = {
-    offset?: number;
-    sort?: SortObject[];
-    pageNumber?: number;
-    pageSize?: number;
-    unpaged?: boolean;
-    paged?: boolean;
+  type PagedModel = {
+    content?: Record<string, any>[];
+    page?: PageMetadata;
   };
 
-  type PageApplicationView = {
+  type PageMetadata = {
+    size?: number;
+    number?: number;
     totalElements?: number;
     totalPages?: number;
-    size?: number;
-    content?: ApplicationView[];
-    number?: number;
-    sort?: SortObject[];
-    numberOfElements?: number;
-    pageable?: PageableObject;
-    first?: boolean;
-    last?: boolean;
-    empty?: boolean;
   };
 
-  type PageSchemaView = {
-    totalElements?: number;
-    totalPages?: number;
-    size?: number;
-    content?: SchemaView[];
-    number?: number;
-    sort?: SortObject[];
-    numberOfElements?: number;
-    pageable?: PageableObject;
-    first?: boolean;
-    last?: boolean;
-    empty?: boolean;
-  };
-
-  type SchemaView = {
-    /** schema 名称 */
-    name: string;
-    /** id */
-    id: string;
-    /** schema 路径 */
-    path: string;
-    httpMethod: HttpMethod;
-    /** schema 是否启用 */
-    enabled: boolean;
-    /** schema 描述 */
-    description?: string;
-  };
-
-  type SortObject = {
-    direction?: string;
-    nullHandling?: string;
-    ascending?: boolean;
-    property?: string;
-    ignoreCase?: boolean;
+  type setOpenApiParams = {
+    /** 应用ID */
+    id: any;
   };
 
   type switchStatusParams = {

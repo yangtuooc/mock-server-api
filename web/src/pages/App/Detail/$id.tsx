@@ -24,7 +24,7 @@ const AppDetail = () => {
   return (
     <>
       <ApplicationDetailViewer dataSource={appView} />
-      <OpenApiSetting />
+      <OpenApiSetting appId={id} />
       {/*<ApplicationSchemaTable onLoad={onPaginationLoad} />*/}
     </>
   );

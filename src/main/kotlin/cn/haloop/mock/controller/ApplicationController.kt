@@ -1,7 +1,8 @@
 package cn.haloop.mock.controller
 
 import cn.haloop.mock.domain.Application
-import cn.haloop.mock.domain.dto.ApplicationCreate
+import cn.haloop.mock.domain.dto.ApplicationEdit
+import cn.haloop.mock.domain.dto.OpenApiSettingEdit
 import cn.haloop.mock.domain.projection.ApplicationView
 import cn.haloop.mock.domain.projection.SchemaView
 import cn.haloop.mock.service.ApplicationService
@@ -32,7 +33,7 @@ class ApplicationController(val svc: ApplicationService) {
         description = "创建一个新的应用"
     )
     @PostMapping
-    fun create(@RequestBody app: ApplicationCreate): ResponseEntity<Void> {
+    fun create(@RequestBody app: ApplicationEdit): ResponseEntity<Void> {
         svc.create(app)
         return ResponseEntity.status(HttpStatus.CREATED).build()
     }
@@ -88,5 +89,36 @@ class ApplicationController(val svc: ApplicationService) {
         pageable: Pageable
     ): ResponseEntity<Page<SchemaView>> {
         return ResponseEntity.ok(svc.findApplicationSchemas(id, pageable))
+    }
+
+    @Operation(
+        operationId = "setOpenApi",
+        summary = "设置OpenAPI",
+        description = "设置应用的OpenAPI配置信息"
+    )
+    @Parameter(
+        name = "id",
+        description = "应用ID",
+        required = true,
+        `in` = ParameterIn.PATH,
+        example = "123e4567-e89b-12d3-a456-426614174000"
+    )
+    @PostMapping("/{id}/open-api")
+    fun setOpenApi(
+        @Parameter(hidden = true) @PathVariable("id") app: Application,
+        @RequestBody openApi: OpenApiSettingEdit
+    ): ResponseEntity<Void> {
+        svc.setOpenApi(app, openApi)
+        return ResponseEntity.status(HttpStatus.CREATED).build()
+    }
+
+    @Operation(
+        operationId = "findOpenApiSetting",
+        summary = "查询OpenAPI配置",
+        description = "查询应用的OpenAPI配置信息"
+    )
+    @GetMapping("/{id}/open-api")
+    fun findOpenApiSetting(@PathVariable("id") id: String): ResponseEntity<OpenApiSettingEdit> {
+        return ResponseEntity.ok(svc.findOpenApiSetting(id))
     }
 }

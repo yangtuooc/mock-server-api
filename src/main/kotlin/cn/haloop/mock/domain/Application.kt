@@ -41,7 +41,7 @@ open class Application : AbstractAuditable() {
      * OpenAPI 设置
      */
     @OneToOne(mappedBy = "app", cascade = [CascadeType.ALL])
-    open var openapi: OpenApiSetting? = null
+    open var openApi: OpenApiSetting? = null
 
     /**
      * 切换状态: 启用/禁用

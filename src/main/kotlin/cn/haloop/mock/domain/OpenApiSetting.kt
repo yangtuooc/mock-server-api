@@ -1,5 +1,6 @@
 package cn.haloop.mock.domain
 
+import cn.haloop.mock.domain.dto.OpenApiSettingEdit
 import cn.haloop.mock.repository.converter.JsonNodeConverter
 import com.fasterxml.jackson.databind.JsonNode
 import jakarta.persistence.*
@@ -28,6 +29,7 @@ open class OpenApiSetting : AbstractAuditable() {
      * @see LoadMode
      */
     @Column(name = "load_mode")
+    @Enumerated(EnumType.STRING)
     open var loadMode: LoadMode = LoadMode.URL
 
     /**
@@ -80,6 +82,23 @@ open class OpenApiSetting : AbstractAuditable() {
     @Column(name = "enabled")
     open var enabled: Boolean = true
 
+}
+
+fun openApiSetting(init: OpenApiSetting.() -> Unit): OpenApiSetting {
+    val openApiSetting = OpenApiSetting()
+    openApiSetting.init()
+    return openApiSetting
+}
+
+fun openApiSetting(application: Application, setting: OpenApiSettingEdit): OpenApiSetting {
+    return openApiSetting {
+        loadMode = setting.loadMode
+        url = setting.url
+        file = setting.file
+        autoUpdate = setting.autoUpdate
+        cron = setting.cron
+        app = application
+    }
 }
 
 
