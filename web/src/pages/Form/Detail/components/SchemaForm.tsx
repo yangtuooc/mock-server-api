@@ -1,7 +1,6 @@
 import { createForm } from '@formily/core';
 import { createSchemaField, FormProvider } from '@formily/react';
-import { FormButtonGroup, FormItem, FormLayout, Input, Reset, Submit, Switch } from '@formily/antd-v5';
-import { Modal } from 'antd';
+import { FormButtonGroup, FormItem, Input, Reset, Submit, Switch } from '@formily/antd-v5';
 
 type SchemaFormProps = {
   jsonSchema: any
@@ -15,6 +14,14 @@ const SchemaField = createSchemaField({
   },
 });
 
+const fetchMockData = () => {
+  console.log('fetch mock data');
+};
+
+const submitForm = () => {
+  console.log('submit form');
+};
+
 const SchemaForm = ({ jsonSchema }: SchemaFormProps) => {
 
   const form = createForm();
@@ -22,15 +29,9 @@ const SchemaForm = ({ jsonSchema }: SchemaFormProps) => {
   return (
     <FormProvider form={form}>
       <SchemaField schema={jsonSchema} />
-      <FormButtonGroup>
-        <Submit onSubmit={() => {
-          console.log('submit');
-        }}>生成数据</Submit>
-      </FormButtonGroup>
       <FormButtonGroup align={'center'}>
-        <Submit onSubmit={() => {
-          console.log('submit');
-        }}>提交</Submit>
+        <Submit ghost onSubmit={fetchMockData}>生成数据</Submit>
+        <Submit onSubmit={submitForm}>提交</Submit>
         <Reset>重置</Reset>
       </FormButtonGroup>
     </FormProvider>

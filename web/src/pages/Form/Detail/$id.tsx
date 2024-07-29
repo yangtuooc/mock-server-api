@@ -5,6 +5,7 @@ import { useParams } from '@@/exports';
 import HttpMethod from '@/components/HttpMethod/HttpMethod';
 import SchemaForm from '@/pages/Form/Detail/components/SchemaForm';
 import ReactJson from 'react-json-view';
+import MockSchemaForm from '@/pages/Form/Detail/components/MockSchemaForm';
 
 const dataSource = {
   name: '线索创建',
@@ -39,8 +40,7 @@ type ApiSchemaDetailProps = {
 const ApiSchemaDetail = () => {
 
   const { id } = useParams();
-  const [showSchema, setShowSchema] = useState(false);
-  const [usedSchema, setUsedSchema] = useState(schema);
+  const [usedJsonSchema, setUsedJsonSchema] = useState(schema);
 
   return (
     <>
@@ -78,16 +78,18 @@ const ApiSchemaDetail = () => {
           <ProDescriptions.Item label={'描述'} dataIndex={'description'} />
         </ProDescriptions>
       </ProCard>
+
+      {/* schema */}
       <ProCard tabs={{ type: 'card' }}>
         <ProCard.TabPane key={'schemaForm'} tab={'表单信息'}>
-          <SchemaForm jsonSchema={usedSchema} />
+          <SchemaForm jsonSchema={usedJsonSchema} />
         </ProCard.TabPane>
         <ProCard.TabPane key={'mockConfig'} tab={'mock数据配置'}>
-          mock数据配置
+          <MockSchemaForm />
         </ProCard.TabPane>
         <ProCard.TabPane key={'jsonSchema'} tab={'jsonSchema'}>
           <ReactJson src={schema} onEdit={(edit) => {
-            setUsedSchema(edit.updated_src);
+            setUsedJsonSchema(edit.updated_src);
           }} />
         </ProCard.TabPane>
       </ProCard>
