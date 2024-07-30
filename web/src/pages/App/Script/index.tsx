@@ -1,5 +1,5 @@
 import { ProCard } from '@ant-design/pro-components';
-import JavaEditor from '@/pages/App/Script/Java';
+import JavaScriptEditor from '@/pages/App/Script/JavaScript';
 
 const AppScript = () => {
   return (
@@ -9,7 +9,7 @@ const AppScript = () => {
       collapsible
     >
       <ProCard title={'前置脚本'} headerBordered>
-        <JavaEditor />
+        <JavaScriptEditor />
       </ProCard>
     </ProCard>
   );
