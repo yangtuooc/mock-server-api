@@ -4,8 +4,10 @@ import cn.haloop.mock.domain.Application
 import cn.haloop.mock.domain.dto.ApplicationEdit
 import cn.haloop.mock.domain.dto.OpenApiSettingEdit
 import cn.haloop.mock.domain.openApiSetting
+import cn.haloop.mock.domain.projection.ApplicationEnvironmentView
 import cn.haloop.mock.domain.projection.ApplicationView
 import cn.haloop.mock.domain.projection.SchemaView
+import cn.haloop.mock.repository.ApplicationEnvironmentRepository
 import cn.haloop.mock.repository.ApplicationRepository
 import cn.haloop.mock.repository.OpenApiSettingRepository
 import cn.haloop.mock.repository.SchemaRepository
@@ -23,6 +25,7 @@ class ApplicationService(
     val appRepository: ApplicationRepository,
     val schemaRepository: SchemaRepository,
     val openApiRepository: OpenApiSettingRepository,
+    val appEnvRepository: ApplicationEnvironmentRepository,
     val conversionService: ConversionService
 ) {
 
@@ -63,5 +66,9 @@ class ApplicationService(
             return conversionService.convert(it, OpenApiSettingEdit::class.java)
         }
         return null
+    }
+
+    fun findApplicationEnvironments(app: Application): List<ApplicationEnvironmentView> {
+        return appEnvRepository.findByApplicationIs(app)
     }
 }

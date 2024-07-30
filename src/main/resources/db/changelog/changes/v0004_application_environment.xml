@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+  <changeSet id="v0004_app_env" author="mawenhao">
+    <createTable tableName="application_environment">
+      <column name="id" type="varchar(64)">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="app_id" type="varchar(64)" remarks="应用id">
+        <constraints nullable="false"/>
+      </column>
+      <column name="name" type="varchar(64)" remarks="环境变量key">
+        <constraints nullable="false"/>
+      </column>
+      <column name="value" type="varchar(512)" remarks="环境变量值">
+        <constraints nullable="false"/>
+      </column>
+      <column name="desc" type="varchar(255)" remarks="环境变量描述">
+        <constraints nullable="true"/>
+      </column>
+      <column name="enabled" type="boolean" remarks="是否启用" defaultValueBoolean="true">
+        <constraints nullable="false"/>
+      </column>
+      <column name="created_at" type="timestamp" remarks="创建时间" defaultValueComputed="now()">
+        <constraints nullable="false"/>
+      </column>
+      <column name="updated_at" type="timestamp" remarks="更新时间" defaultValueComputed="now()">
+        <constraints nullable="true"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+</databaseChangeLog>

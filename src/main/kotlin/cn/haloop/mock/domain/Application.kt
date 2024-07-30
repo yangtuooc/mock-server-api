@@ -44,6 +44,12 @@ open class Application : AbstractAuditable() {
     open var openApi: OpenApiSetting? = null
 
     /**
+     * 环境变量
+     */
+    @OneToMany(mappedBy = "application", cascade = [CascadeType.ALL])
+    open var environments: MutableList<ApplicationEnvironment> = mutableListOf()
+
+    /**
      * 切换状态: 启用/禁用
      */
     fun switchStatus() {

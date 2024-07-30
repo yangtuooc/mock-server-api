@@ -45,6 +45,20 @@ export async function getApplication(
   });
 }
 
+/** 查询应用环境变量 查询应用的环境变量列表 GET /applications/${param0}/environments */
+export async function findApplicationEnvironments(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.findApplicationEnvironmentsParams,
+  options?: { [key: string]: any },
+) {
+  const { id: param0, ...queryParams } = params;
+  return request<API.ApplicationEnvironmentView[]>(`${/api/}/applications/${param0}/environments`, {
+    method: 'GET',
+    params: { ...queryParams },
+    ...(options || {}),
+  });
+}
+
 /** 查询OpenAPI配置 查询应用的OpenAPI配置信息 GET /applications/${param0}/open-api */
 export async function findOpenApiSetting(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

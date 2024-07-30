@@ -3,6 +3,7 @@ package cn.haloop.mock.controller
 import cn.haloop.mock.domain.Application
 import cn.haloop.mock.domain.dto.ApplicationEdit
 import cn.haloop.mock.domain.dto.OpenApiSettingEdit
+import cn.haloop.mock.domain.projection.ApplicationEnvironmentView
 import cn.haloop.mock.domain.projection.ApplicationView
 import cn.haloop.mock.domain.projection.SchemaView
 import cn.haloop.mock.service.ApplicationService
@@ -126,6 +127,23 @@ class ApplicationController(val svc: ApplicationService) {
     @GetMapping("/{id}/open-api")
     fun findOpenApiSetting(@PathVariable("id") id: String): ResponseEntity<OpenApiSettingEdit> {
         return ResponseEntity.ok(svc.findOpenApiSetting(id))
+    }
+
+    @Operation(
+        operationId = "findApplicationEnvironments",
+        summary = "查询应用环境变量",
+        description = "查询应用的环境变量列表"
+    )
+    @Parameter(
+        name = "id",
+        description = "应用ID",
+        required = true,
+        `in` = ParameterIn.PATH,
+        example = "123e4567-e89b-12d3-a456-426614174000"
+    )
+    @GetMapping("/{id}/environments")
+    fun findApplicationEnvironments(@Parameter(hidden = true) @PathVariable("id") app: Application): ResponseEntity<List<ApplicationEnvironmentView>> {
+        return ResponseEntity.ok(svc.findApplicationEnvironments(app))
     }
 
 

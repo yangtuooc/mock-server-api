@@ -6,6 +6,17 @@ declare namespace API {
     description: string;
   };
 
+  type ApplicationEnvironmentView = {
+    /** 变量名 */
+    name: string;
+    /** 变量值 */
+    value: string;
+    /** 变量ID */
+    id: string;
+    /** 变量描述 */
+    desc: string;
+  };
+
   type ApplicationView = {
     /** 应用名称 */
     name: string;
@@ -19,6 +30,11 @@ declare namespace API {
     endpoint: string;
     /** 应用描述 */
     description: string;
+  };
+
+  type findApplicationEnvironmentsParams = {
+    /** 应用ID */
+    id: any;
   };
 
   type findApplicationSchemasParams = {
