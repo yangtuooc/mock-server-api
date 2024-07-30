@@ -9,7 +9,7 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: '@umijs/max',
+    title: 'mock server',
   },
   routes: [
     {
@@ -19,6 +19,7 @@ export default defineConfig({
     {
       name: '首页',
       path: '/home',
+      menuRender: false,
       component: './Home',
     },
     {
