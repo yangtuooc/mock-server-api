@@ -1,8 +1,11 @@
 import { ProCard } from '@ant-design/pro-components';
 import JavaScriptEditor from '@/components/Script/JavaScript';
 
+type AppScriptSettingsProps = {
+  appId: string
+}
 
-const AppScriptSettings = () => {
+const AppScriptSettings = ({ appId }: AppScriptSettingsProps) => {
   return (
     <ProCard
       title="脚本配置"

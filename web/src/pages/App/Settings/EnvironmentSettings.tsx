@@ -1,6 +1,10 @@
 import { ProCard } from '@ant-design/pro-components';
 
-const EnvironmentSettings = () => {
+type EnvironmentSettingsProps = {
+  appId: string;
+}
+
+const EnvironmentSettings = ({ appId }: EnvironmentSettingsProps) => {
   return (
     <ProCard
       title={'变量配置'}

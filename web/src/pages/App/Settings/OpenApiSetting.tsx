@@ -31,7 +31,7 @@ const OpenApiSetting: React.FC<OpenApiSettingProps> = ({ appId }) => {
   return (
     <>
       <ProCard
-        title={'OpenAPI设置'}
+        title={'OpenAPI配置'}
         collapsible
         bordered
         headerBordered
