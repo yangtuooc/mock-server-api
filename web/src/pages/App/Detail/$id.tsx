@@ -3,9 +3,8 @@ import ApplicationDetailViewer from '@/pages/App/Detail/components/ApplicationDe
 import { useEffect, useState } from 'react';
 import { getApplication } from '@/services/api/application';
 import { message } from 'antd';
-import OpenApiSetting from '@/pages/App/Detail/components/OpenApiSetting';
 import ApplicationApiList from '@/pages/App/Api/List';
-import AppScriptSetting from '@/pages/App/Script';
+import ApplicationSettings from '@/pages/App/Settings';
 
 const AppDetail = () => {
 
@@ -26,9 +25,7 @@ const AppDetail = () => {
   return (
     <>
       <ApplicationDetailViewer dataSource={appView} />
-      <AppScriptSetting />
-      <OpenApiSetting appId={id} />
-      {/*<ApplicationSchemaTable onLoad={onPaginationLoad} />*/}
+      <ApplicationSettings />
       <ApplicationApiList />
     </>
   );
