@@ -9,7 +9,6 @@ type OpenApiSettingProps = {
 }
 
 const syncOpenApi = (appId: string) => {
-  console.log('同步OpenAPI');
   return message.success('同步成功');
 };
 
@@ -18,6 +17,7 @@ const OpenApiSetting: React.FC<OpenApiSettingProps> = ({ appId }) => {
   const [schemaMode, setSchemaMode] = useState('endpoint');
   const [editMode, setEditMode] = useState(false);
   const [autoUpdate, setAutoUpdate] = useState(false);
+  const [onCollapse, setOnCollapse] = useState(false);
 
   const handleFinish = async (appId: string, values: API.OpenApiSettingEdit) => {
     setOpenApi({ id: appId }, values).then(() => {
@@ -31,29 +31,32 @@ const OpenApiSetting: React.FC<OpenApiSettingProps> = ({ appId }) => {
   return (
     <>
       <ProCard
-        title={'OpenAPI设置'}
+        title={'OpenAPI配置'}
         collapsible
         bordered
         headerBordered
         style={{
           marginBottom: 16,
         }}
+        onCollapse={setOnCollapse}
         extra={
-          <>
-            <Button type={'primary'} style={{ marginRight: 10 }} onClick={() => {
-              return syncOpenApi(appId);
-            }}>
-              同步
-            </Button>
-            <Button
-              onClick={() => {
-                setEditMode(!editMode);
-              }}
-              danger={!editMode}
-            >
-              {editMode ? '取消' : '编辑'}
-            </Button>
-          </>
+          !onCollapse && (
+            <>
+              <Button type={'primary'} style={{ marginRight: 10 }} onClick={() => {
+                return syncOpenApi(appId);
+              }}>
+                同步
+              </Button>
+              <Button
+                onClick={() => {
+                  setEditMode(!editMode);
+                }}
+                danger={!editMode}
+              >
+                {editMode ? '取消' : '编辑'}
+              </Button>
+            </>
+          )
         }
       >
         <ProForm<API.OpenApiSettingEdit>

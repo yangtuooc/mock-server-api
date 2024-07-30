@@ -17,9 +17,9 @@ importers:
       '@ant-design/pro-form':
         specifier: ^2.28.4
         version: 2.28.4(antd@5.19.3(date-fns@2.30.0)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(rc-field-form@2.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@codemirror/lang-java':
-        specifier: ^6.0.1
-        version: 6.0.1
+      '@codemirror/lang-javascript':
+        specifier: ^6.2.2
+        version: 6.2.2
       '@formily/antd-v5':
         specifier: ^1.2.2
         version: 1.2.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(antd@5.19.3(date-fns@2.30.0)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(typescript@5.5.4)
@@ -32,6 +32,9 @@ importers:
       '@formily/reactive':
         specifier: ^2.3.2
         version: 2.3.2
+      '@uiw/codemirror-extensions-mentions':
+        specifier: ^4.23.0
+        version: 4.23.0(@codemirror/state@6.4.1)(@codemirror/view@6.29.1)
       '@uiw/react-codemirror':
         specifier: ^4.23.0
         version: 4.23.0(@babel/runtime@7.24.8)(@codemirror/autocomplete@6.17.0(@codemirror/language@6.10.2)(@codemirror/state@6.4.1)(@codemirror/view@6.29.1)(@lezer/common@1.2.1))(@codemirror/language@6.10.2)(@codemirror/lint@6.8.1)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.29.1)(codemirror@6.0.1(@lezer/common@1.2.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -930,8 +933,8 @@ packages:
   '@codemirror/commands@6.6.0':
     resolution: {integrity: sha512-qnY+b7j1UNcTS31Eenuc/5YJB6gQOzkUoNmJQc0rznwqSRpeaWWpjkWy2C/MPTcePpsKJEM26hXrOXl1+nceXg==}
 
-  '@codemirror/lang-java@6.0.1':
-    resolution: {integrity: sha512-OOnmhH67h97jHzCuFaIEspbmsT98fNdhVhmA3zCxW0cn7l8rChDhZtwiwJ/JOKXgfm4J+ELxQihxaI7bj7mJRg==}
+  '@codemirror/lang-javascript@6.2.2':
+    resolution: {integrity: sha512-VGQfY+FCc285AhWuwjYxQyUQcYurWlxdKYT4bqwr3Twnd5wP5WSeu52t4tvvuWmljT4EmgEgZCqSieokhtY8hg==}
 
   '@codemirror/language@6.10.2':
     resolution: {integrity: sha512-kgbTYTo0Au6dCSc/TFy7fK3fpJmgHDv1sG1KNQKJXVi+xBTEeBPY/M30YXiU6mMXeH+YIDLsbrT4ZwNRdtF+SA==}
@@ -1564,8 +1567,8 @@ packages:
   '@lezer/highlight@1.2.0':
     resolution: {integrity: sha512-WrS5Mw51sGrpqjlh3d4/fOwpEV2Hd3YOkp9DBt4k8XZQcoTHZFB7sx030A6OcahF4J1nDQAa3jXlTVVYH50IFA==}
 
-  '@lezer/java@1.1.2':
-    resolution: {integrity: sha512-3j8X70JvYf0BZt8iSRLXLkt0Ry1hVUgH6wT32yBxH/Xi55nW2VMhc1Az4SKwu4YGSmxCm1fsqDDcHTuFjC8pmg==}
+  '@lezer/javascript@1.4.17':
+    resolution: {integrity: sha512-bYW4ctpyGK+JMumDApeUzuIezX01H76R1foD6LcRX224FWfyYit/HYxiPGDjXXe/wQWASjCvVGoukTH68+0HIA==}
 
   '@lezer/lr@1.4.2':
     resolution: {integrity: sha512-pu0K1jCIdnQ12aWNaAVU5bzi7Bd1w54J3ECgANPmYLtQKP0HBj2cE/5coBD66MT10xbtIuUr7tg0Shbsvk0mDA==}
@@ -2012,6 +2015,12 @@ packages:
       '@codemirror/language': '>=6.0.0'
       '@codemirror/lint': '>=6.0.0'
       '@codemirror/search': '>=6.0.0'
+      '@codemirror/state': '>=6.0.0'
+      '@codemirror/view': '>=6.0.0'
+
+  '@uiw/codemirror-extensions-mentions@4.23.0':
+    resolution: {integrity: sha512-l+UwQcnpXvf/r8m3LLx27+5oB41Uh/6hv0JkOy1kHfNj8bZqGBMBgrnObGFfkC/oYOJHeOXvtCb0VFShTDcBRw==}
+    peerDependencies:
       '@codemirror/state': '>=6.0.0'
       '@codemirror/view': '>=6.0.0'
 
@@ -8751,10 +8760,15 @@ snapshots:
       '@codemirror/view': 6.29.1
       '@lezer/common': 1.2.1
 
-  '@codemirror/lang-java@6.0.1':
+  '@codemirror/lang-javascript@6.2.2':
     dependencies:
+      '@codemirror/autocomplete': 6.17.0(@codemirror/language@6.10.2)(@codemirror/state@6.4.1)(@codemirror/view@6.29.1)(@lezer/common@1.2.1)
       '@codemirror/language': 6.10.2
-      '@lezer/java': 1.1.2
+      '@codemirror/lint': 6.8.1
+      '@codemirror/state': 6.4.1
+      '@codemirror/view': 6.29.1
+      '@lezer/common': 1.2.1
+      '@lezer/javascript': 1.4.17
 
   '@codemirror/language@6.10.2':
     dependencies:
@@ -9354,7 +9368,7 @@ snapshots:
     dependencies:
       '@lezer/common': 1.2.1
 
-  '@lezer/java@1.1.2':
+  '@lezer/javascript@1.4.17':
     dependencies:
       '@lezer/common': 1.2.1
       '@lezer/highlight': 1.2.0
@@ -9956,6 +9970,11 @@ snapshots:
       '@codemirror/language': 6.10.2
       '@codemirror/lint': 6.8.1
       '@codemirror/search': 6.5.6
+      '@codemirror/state': 6.4.1
+      '@codemirror/view': 6.29.1
+
+  '@uiw/codemirror-extensions-mentions@4.23.0(@codemirror/state@6.4.1)(@codemirror/view@6.29.1)':
+    dependencies:
       '@codemirror/state': 6.4.1
       '@codemirror/view': 6.29.1
 
