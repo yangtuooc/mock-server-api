@@ -22,26 +22,18 @@ const JavaScriptEditor = ({ mentionOptions }: JavaScriptEditorProps) => {
   const replaceVariables = (value: string) => {
     let result = value;
     variables.forEach((variable) => {
-      result = result.replace(variable.label, variable.value);
+      result = result.replace(variable.label, `'${variable.value}'`);
     });
     return result;
   };
 
   const runCode = () => {
-    const lines = value.split('\n');
-    let i = 0;
-    const next = () => {
-      if (i < lines.length) {
-        try {
-          eval(replaceVariables(lines[i]));
-        } catch (error) {
-          console.error(`Error at line ${i + 1}: ${error}`);
-        }
-        i++;
-        setTimeout(next, 0);
-      }
-    };
-    next();
+    try {
+      eval(replaceVariables(value));
+    } catch (e) {
+      console.error(e);
+    }
+
   };
 
   return (
