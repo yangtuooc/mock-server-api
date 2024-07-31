@@ -72,6 +72,7 @@ const EnvironmentSettings = ({ appId }: EnvironmentSettingsProps) => {
       headerBordered
       collapsible
       bordered
+      defaultCollapsed={true}
     >
       <EditableProTable<API.ApplicationEnvironmentView>
         rowKey="id"

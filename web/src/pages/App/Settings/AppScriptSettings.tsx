@@ -40,6 +40,7 @@ const AppScriptSettings = ({ appId }: AppScriptSettingsProps) => {
       headerBordered
       collapsible
       bordered
+      defaultCollapsed={true}
     >
       <ProCard title={'前置脚本'} headerBordered subTitle={'在请求发送之前执行'}>
         <JavaScriptEditor mentionOptions={mentionOptions} />

@@ -35,6 +35,7 @@ const OpenApiSetting: React.FC<OpenApiSettingProps> = ({ appId }) => {
         collapsible
         bordered
         headerBordered
+        defaultCollapsed={true}
         style={{
           marginBottom: 16,
         }}
