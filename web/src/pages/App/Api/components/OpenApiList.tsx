@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProCard, ProList } from '@ant-design/pro-components';
-import { Button, Space, Tag } from 'antd';
+import { Button, Space } from 'antd';
 import { useNavigate } from '@umijs/max';
 import HttpMethodTag from '@/components/HttpMethod/HttpMethod';
 
@@ -15,7 +15,7 @@ type OpenApiDescription = {
 type OpenApiTag = {
   name: string;
   description?: string;
-  schemas: OpenApiDescription[];
+  apiList: OpenApiDescription[];
 }
 
 
@@ -27,7 +27,7 @@ const tags: OpenApiTag[] = [
   {
     name: '线索管理',
     description: '线索管理相关接口',
-    schemas: [
+    apiList: [
       {
         id: 'de9d1967-72de-457d-9c79-3f6d24676d34',
         name: '创建线索',
@@ -61,7 +61,7 @@ const tags: OpenApiTag[] = [
   {
     name: '保单管理',
     description: '保单管理相关接口',
-    schemas: [
+    apiList: [
       {
         id: 'de9d1967-72de-457d-9c79-3f6d24676d38',
         name: '查看保单',
@@ -91,7 +91,7 @@ const OpenApiList = () => {
               {
                 <ProList<OpenApiDescription>
                   rowKey={'id'}
-                  dataSource={tag.schemas}
+                  dataSource={tag.apiList}
                   metas={{
                     title: {
                       dataIndex: 'name',

@@ -19,3 +19,15 @@ spring:
   jpa:
     show-sql: false
 
+---
+spring:
+  data:
+    mongodb:
+      database: mock_schema
+      host: localhost
+      port: 27017
+      username: root
+      password: 123456
+      authentication-database: admin
+
+

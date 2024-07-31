@@ -3,6 +3,7 @@ package cn.haloop.mock.service
 import cn.haloop.mock.domain.Application
 import cn.haloop.mock.domain.dto.ApplicationEdit
 import cn.haloop.mock.domain.dto.OpenApiSettingEdit
+import cn.haloop.mock.domain.event.OpenApiSettingCreated
 import cn.haloop.mock.domain.openApiSetting
 import cn.haloop.mock.domain.projection.ApplicationEnvironmentView
 import cn.haloop.mock.domain.projection.ApplicationView
@@ -12,6 +13,7 @@ import cn.haloop.mock.repository.ApplicationRepository
 import cn.haloop.mock.repository.OpenApiSettingRepository
 import cn.haloop.mock.repository.SchemaRepository
 import jakarta.transaction.Transactional
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.core.convert.ConversionService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -26,7 +28,8 @@ class ApplicationService(
     val schemaRepository: SchemaRepository,
     val openApiRepository: OpenApiSettingRepository,
     val appEnvRepository: ApplicationEnvironmentRepository,
-    val conversionService: ConversionService
+    val conversionService: ConversionService,
+    val eventPublisher: ApplicationEventPublisher
 ) {
 
 
@@ -59,6 +62,7 @@ class ApplicationService(
     fun setOpenApi(app: Application, openApi: OpenApiSettingEdit) {
         app.openApi = openApiSetting(app, openApi)
         appRepository.save(app)
+        eventPublisher.publishEvent(OpenApiSettingCreated(app.id))
     }
 
     fun findOpenApiSetting(id: String): OpenApiSettingEdit? {
