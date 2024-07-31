@@ -20,7 +20,7 @@ open class OpenApiSetting : AbstractAuditable() {
     /**
      * 应用id
      */
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "app_id", referencedColumnName = "id")
     open var app: Application? = null
 

@@ -1,16 +1,13 @@
 import { ProCard, ProForm, ProFormRadio, ProFormText, ProFormUploadDragger } from '@ant-design/pro-components';
 import React, { useState } from 'react';
 import { Button, message } from 'antd';
-import { findOpenApiSetting, setOpenApi } from '@/services/api/application';
+import { findOpenApiSetting, setOpenApi, syncApiDoc } from '@/services/api/application';
 
 
 type OpenApiSettingProps = {
   appId: string;
 }
 
-const syncOpenApi = (appId: string) => {
-  return message.success('同步成功');
-};
 
 const OpenApiSetting: React.FC<OpenApiSettingProps> = ({ appId }) => {
 
@@ -18,6 +15,12 @@ const OpenApiSetting: React.FC<OpenApiSettingProps> = ({ appId }) => {
   const [editMode, setEditMode] = useState(false);
   const [autoUpdate, setAutoUpdate] = useState(false);
   const [onCollapse, setOnCollapse] = useState(false);
+
+  const syncOpenApi = (appId: string) => {
+    syncApiDoc({ id: appId }).then(() => {
+      return message.success('同步成功');
+    });
+  };
 
   const handleFinish = async (appId: string, values: API.OpenApiSettingEdit) => {
     setOpenApi({ id: appId }, values).then(() => {

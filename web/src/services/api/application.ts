@@ -45,6 +45,20 @@ export async function getApplication(
   });
 }
 
+/** 同步API文档 从远程获取最新的API文档，更新本地缓存 PUT /applications/${param0}/api-doc */
+export async function syncApiDoc(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.syncApiDocParams,
+  options?: { [key: string]: any },
+) {
+  const { id: param0, ...queryParams } = params;
+  return request<any>(`${/api/}/applications/${param0}/api-doc`, {
+    method: 'PUT',
+    params: { ...queryParams },
+    ...(options || {}),
+  });
+}
+
 /** 查询应用API列表 查询应用的API列表 GET /applications/${param0}/api-list */
 export async function findApplicationApiList(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

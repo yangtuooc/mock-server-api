@@ -3,6 +3,7 @@ package cn.haloop.mock.controller
 import cn.haloop.mock.domain.OpenApiSetting
 import cn.haloop.mock.domain.dto.OpenApiSettingEdit
 import cn.haloop.mock.service.OpenApiSettingService
+import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.ResponseEntity
@@ -21,6 +22,11 @@ class OpenApiSettingController(
     val svc: OpenApiSettingService
 ) {
 
+    @Operation(
+        operationId = "update",
+        summary = "更新OpenApi设置",
+        description = "更新OpenApi设置"
+    )
     @PutMapping("/{id}")
     fun update(
         @Parameter(hidden = true) @PathVariable("id") setting: OpenApiSetting,

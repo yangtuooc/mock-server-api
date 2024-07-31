@@ -164,4 +164,22 @@ class ApplicationController(val svc: ApplicationService) {
         return ResponseEntity.ok(svc.findApplicationApiList(app))
     }
 
+    @Operation(
+        operationId = "syncApiDoc",
+        summary = "同步API文档",
+        description = "从远程获取最新的API文档，更新本地缓存"
+    )
+    @Parameter(
+        name = "id",
+        description = "应用ID",
+        required = true,
+        `in` = ParameterIn.PATH,
+        example = "123e4567-e89b-12d3-a456-426614174000"
+    )
+    @PutMapping("/{id}/api-doc")
+    fun syncApiDoc(@Parameter(hidden = true) @PathVariable("id") app: Application): ResponseEntity<Void> {
+        svc.syncApiDoc(app)
+        return ResponseEntity.ok().build()
+    }
+
 }

@@ -32,7 +32,8 @@ class ApplicationService(
     val appEnvRepository: ApplicationEnvironmentRepository,
     val conversionService: ConversionService,
     val eventPublisher: ApplicationEventPublisher,
-    val openApiService: OpenApiService
+    val openApiService: OpenApiService,
+    val openApiSettingService: OpenApiSettingService
 ) {
 
 
@@ -64,7 +65,7 @@ class ApplicationService(
 
     @Transactional(rollbackOn = [Exception::class])
     fun setOpenApi(app: Application, openApi: OpenApiSettingEdit) {
-        app.openApi = openApiSetting(app, openApi)
+        app.apiSetting = openApiSetting(app, openApi)
         appRepository.save(app)
         eventPublisher.publishEvent(OpenApiSettingCreated(app.id))
     }
@@ -82,5 +83,10 @@ class ApplicationService(
 
     fun findApplicationApiList(app: Application): List<ApiTag>? {
         return openApiService.findOpenApiTags(app)
+    }
+
+    fun syncApiDoc(app: Application) {
+        val apiSetting = app.apiSetting ?: throw IllegalArgumentException("${app.id} has no open api setting")
+        openApiSettingService.sync(apiSetting)
     }
 }

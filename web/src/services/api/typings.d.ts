@@ -43,14 +43,14 @@ declare namespace API {
     name: string;
     /** 应用ID */
     id: string;
-    /** 应用是否启用 */
-    enabled: boolean;
     /** 创建时间 */
     createdAt: string;
-    /** 应用端点 */
-    endpoint: string;
+    /** 应用是否启用 */
+    enabled: boolean;
     /** 应用描述 */
     description: string;
+    /** 应用端点 */
+    endpoint: string;
   };
 
   type findApplicationApiListParams = {
@@ -118,6 +118,11 @@ declare namespace API {
   };
 
   type switchStatusParams = {
+    /** 应用ID */
+    id: any;
+  };
+
+  type syncApiDocParams = {
     /** 应用ID */
     id: any;
   };

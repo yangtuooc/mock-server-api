@@ -36,9 +36,7 @@ class OpenApiSettingHandler(
             log.error("file mode is not supported yet, appId: ${event.appId}")
             throw UnsupportedOperationException("file mode is not supported yet, appId: ${event.appId}")
         }
-
-        val inputStream = openApiSetting.url!!.openStream()
-        val document = OpenApiDocument(event.appId, inputStream.readAllBytes())
+        val document = OpenApiDocument(event.appId, openApiSetting.url!!.readBytes())
         openApiDocumentRepository.save(document)
     }
 }
