@@ -45,6 +45,20 @@ export async function getApplication(
   });
 }
 
+/** 查询应用API列表 查询应用的API列表 GET /applications/${param0}/api-list */
+export async function findApplicationApiList(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.findApplicationApiListParams,
+  options?: { [key: string]: any },
+) {
+  const { id: param0, ...queryParams } = params;
+  return request<API.ApiTag[]>(`${/api/}/applications/${param0}/api-list`, {
+    method: 'GET',
+    params: { ...queryParams },
+    ...(options || {}),
+  });
+}
+
 /** 查询应用环境变量 查询应用的环境变量列表 GET /applications/${param0}/environments */
 export async function findApplicationEnvironments(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

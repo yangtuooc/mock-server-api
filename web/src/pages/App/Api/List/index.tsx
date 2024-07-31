@@ -1,12 +1,23 @@
 import { ProCard } from '@ant-design/pro-components';
 import OpenApiList from '@/pages/App/Api/components/OpenApiList';
+import { useEffect, useState } from 'react';
+import { findApplicationApiList } from '@/services/api/application';
 
 type ApplicationSchemaListProps = {
-  id: string;
+  appId: string;
 };
 
 
-const ApplicationApiList = () => {
+const ApplicationApiList = ({ appId }: ApplicationSchemaListProps) => {
+
+  const [tags, setTags] = useState<API.ApiTag[]>([]);
+
+  useEffect(() => {
+    findApplicationApiList({ id: appId }).then((data) => {
+      setTags(data);
+    });
+  }, [appId]);
+
   return (
     <>
       <ProCard
@@ -18,7 +29,7 @@ const ApplicationApiList = () => {
           marginBottom: 16,
         }}
       >
-        <OpenApiList />
+        <OpenApiList appId={appId} tags={tags} />
       </ProCard>
     </>
   );

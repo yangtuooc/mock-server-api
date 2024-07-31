@@ -1,4 +1,25 @@
 declare namespace API {
+  type Api = {
+    /** 接口hash，根据接口的路径和方法生成，用于标识接口的唯一性 */
+    hash: string;
+    /** 接口名称 */
+    name: string;
+    /** 接口描述 */
+    description?: string;
+    /** 接口路径 */
+    path: string;
+    /** 请求方法 */
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  };
+
+  type ApiTag = {
+    /** 对应openapi的tag，通常是一个controller */
+    name?: string;
+    /** tag的描述 */
+    description?: string;
+    apiList?: Api[];
+  };
+
   type ApplicationEdit = {
     /** 应用名称 */
     name: string;
@@ -22,14 +43,19 @@ declare namespace API {
     name: string;
     /** 应用ID */
     id: string;
-    /** 创建时间 */
-    createdAt: string;
     /** 应用是否启用 */
     enabled: boolean;
+    /** 创建时间 */
+    createdAt: string;
     /** 应用端点 */
     endpoint: string;
     /** 应用描述 */
     description: string;
+  };
+
+  type findApplicationApiListParams = {
+    /** 应用ID */
+    id: any;
   };
 
   type findApplicationEnvironmentsParams = {

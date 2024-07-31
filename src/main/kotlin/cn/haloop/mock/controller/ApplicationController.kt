@@ -1,6 +1,7 @@
 package cn.haloop.mock.controller
 
 import cn.haloop.mock.domain.Application
+import cn.haloop.mock.domain.dto.ApiTag
 import cn.haloop.mock.domain.dto.ApplicationEdit
 import cn.haloop.mock.domain.dto.OpenApiSettingEdit
 import cn.haloop.mock.domain.projection.ApplicationEnvironmentView
@@ -146,5 +147,21 @@ class ApplicationController(val svc: ApplicationService) {
         return ResponseEntity.ok(svc.findApplicationEnvironments(app))
     }
 
+    @Operation(
+        operationId = "findApplicationApiList",
+        summary = "查询应用API列表",
+        description = "查询应用的API列表"
+    )
+    @Parameter(
+        name = "id",
+        description = "应用ID",
+        required = true,
+        `in` = ParameterIn.PATH,
+        example = "123e4567-e89b-12d3-a456-426614174000"
+    )
+    @GetMapping("/{id}/api-list")
+    fun findApplicationApiList(@Parameter(hidden = true) @PathVariable("id") app: Application): ResponseEntity<List<ApiTag>> {
+        return ResponseEntity.ok(svc.findApplicationApiList(app))
+    }
 
 }

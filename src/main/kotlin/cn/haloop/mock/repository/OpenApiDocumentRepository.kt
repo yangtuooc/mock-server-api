@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository
  * @author yangtuo
  */
 @Repository
-interface OpenApiDocumentRepository : MongoRepository<OpenApiDocument, String>
+interface OpenApiDocumentRepository : MongoRepository<OpenApiDocument, String> {
+
+    fun findByAppIdIs(appId: String): OpenApiDocument?
+}

@@ -26,7 +26,7 @@ const AppDetail = () => {
     <>
       <ApplicationDetailViewer dataSource={appView} />
       <ApplicationSettings appId={id} />
-      <ApplicationApiList />
+      <ApplicationApiList appId={id} />
     </>
   );
 };

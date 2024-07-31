@@ -4,8 +4,8 @@ import { Button, Space } from 'antd';
 import { useNavigate } from '@umijs/max';
 import HttpMethodTag from '@/components/HttpMethod/HttpMethod';
 
-type OpenApiDescription = {
-  id: string;
+type Api = {
+  hash: string;
   name: string;
   method: string;
   path: string;
@@ -13,67 +13,20 @@ type OpenApiDescription = {
 };
 
 type OpenApiTag = {
+  id: string;
   name: string;
   description?: string;
-  apiList: OpenApiDescription[];
+  apiList: Api[];
 }
 
 
 type OpenApiSchemaListProps = {
-  schemas: OpenApiDescription[];
+  appId: string,
+  tags: API.ApiTag[]
 }
 
-const tags: OpenApiTag[] = [
-  {
-    name: '线索管理',
-    description: '线索管理相关接口',
-    apiList: [
-      {
-        id: 'de9d1967-72de-457d-9c79-3f6d24676d34',
-        name: '创建线索',
-        method: 'POST',
-        path: '/api/v1/leads',
-        description: '提交一条用户信息到表单中台，返回线索ID',
-      },
-      {
-        id: 'de9d1967-72de-457d-9c79-3f6d24676d35',
-        name: '更新线索',
-        method: 'PUT',
-        path: '/api/v1/leads/:id',
-        description: '通过线索ID更新线索信息',
-      },
-      {
-        id: 'de9d1967-72de-457d-9c79-3f6d24676d36',
-        name: '查看线索',
-        method: 'GET',
-        path: '/api/v1/leads/:id',
-        description: '通过线索ID查看线索信息',
-      },
-      {
-        id: 'de9d1967-72de-457d-9c79-3f6d24676d37',
-        name: '删除线索',
-        method: 'DELETE',
-        path: '/api/v1/leads/:id',
-        description: '通过线索ID删除线索',
-      },
-    ],
-  },
-  {
-    name: '保单管理',
-    description: '保单管理相关接口',
-    apiList: [
-      {
-        id: 'de9d1967-72de-457d-9c79-3f6d24676d38',
-        name: '查看保单',
-        method: 'GET',
-        path: '/api/v1/policies/:id',
-        description: 'schema3 description',
-      },
-    ],
-  },
-];
 
-const OpenApiList = () => {
+const OpenApiList = ({ appId, tags }: OpenApiSchemaListProps) => {
 
   const navigate = useNavigate();
 
@@ -89,7 +42,7 @@ const OpenApiList = () => {
                      ghost={false}
             >
               {
-                <ProList<OpenApiDescription>
+                <ProList<API.Api>
                   rowKey={'id'}
                   dataSource={tag.apiList}
                   metas={{
@@ -114,7 +67,7 @@ const OpenApiList = () => {
                     actions: {
                       render: (text, record) => [
                         <Button key="go" type="primary" onClick={() => {
-                          navigate(`/schema/${record.id}`);
+                          navigate(`/${appId}/api-list/${record.hash}`);
                         }}>Go</Button>,
                       ],
                     },

@@ -32,8 +32,14 @@
     <mapstruct.extensions.version>0.1.2</mapstruct.extensions.version>
     <mapstruct.version>1.5.2.Final</mapstruct.version>
     <graalvm.version>23.0.5</graalvm.version>
+    <swagger.parser.version>2.1.22</swagger.parser.version>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>io.swagger.parser.v3</groupId>
+      <artifactId>swagger-parser-v3</artifactId>
+      <version>${swagger.parser.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.webjars.npm</groupId>
       <artifactId>md5</artifactId>

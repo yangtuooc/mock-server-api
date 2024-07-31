@@ -2,6 +2,7 @@ package cn.haloop.mock.service
 
 import cn.haloop.mock.domain.Application
 import cn.haloop.mock.domain.application
+import cn.haloop.mock.domain.dto.ApiTag
 import cn.haloop.mock.domain.dto.ApplicationEdit
 import cn.haloop.mock.domain.dto.OpenApiSettingEdit
 import cn.haloop.mock.domain.event.OpenApiSettingCreated
@@ -30,7 +31,8 @@ class ApplicationService(
     val openApiRepository: OpenApiSettingRepository,
     val appEnvRepository: ApplicationEnvironmentRepository,
     val conversionService: ConversionService,
-    val eventPublisher: ApplicationEventPublisher
+    val eventPublisher: ApplicationEventPublisher,
+    val openApiService: OpenApiService
 ) {
 
 
@@ -76,5 +78,9 @@ class ApplicationService(
 
     fun findApplicationEnvironments(app: Application): List<ApplicationEnvironmentView> {
         return appEnvRepository.findByApplicationIs(app)
+    }
+
+    fun findApplicationApiList(app: Application): List<ApiTag>? {
+        return openApiService.findOpenApiTags(app)
     }
 }
