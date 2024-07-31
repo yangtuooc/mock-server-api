@@ -23,11 +23,9 @@ spring:
 spring:
   data:
     mongodb:
-      database: mock_schema
       host: localhost
       port: 27017
+      database: mock_schema
       username: root
-      password: 123456
+      password: "123456"
       authentication-database: admin
-
-

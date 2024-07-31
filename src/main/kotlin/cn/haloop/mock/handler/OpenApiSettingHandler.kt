@@ -1,23 +1,44 @@
 package cn.haloop.mock.handler
 
+import cn.haloop.mock.domain.document.OpenApiDocument
 import cn.haloop.mock.domain.event.OpenApiSettingCreated
-import org.springframework.context.event.EventListener
-import org.springframework.scheduling.annotation.Async
+import cn.haloop.mock.repository.OpenApiDocumentRepository
+import cn.haloop.mock.repository.OpenApiSettingRepository
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
+import org.springframework.transaction.event.TransactionPhase
+import org.springframework.transaction.event.TransactionalEventListener
 
 /**
  * @author yangtuo
  */
 @Component
-class OpenApiSettingHandler {
+class OpenApiSettingHandler(
+    val openApiSettingRepository: OpenApiSettingRepository,
+    val openApiDocumentRepository: OpenApiDocumentRepository
+) {
+
+    private val log = LoggerFactory.getLogger(OpenApiSettingHandler::class.java)
 
 
-    /**
-     * 事务是跟线程绑定的，新启动一个线程处理事件，防止影响主线程事务提交
-     */
-    @Async
-    @EventListener(OpenApiSettingCreated::class)
+    @TransactionalEventListener(
+        fallbackExecution = true,
+        phase = TransactionPhase.AFTER_COMMIT,
+        classes = [OpenApiSettingCreated::class]
+    )
     fun handle(event: OpenApiSettingCreated) {
-        // TODO
+        val openApiSetting = openApiSettingRepository.findByAppId(event.appId)
+        if (openApiSetting == null) {
+            log.error("open api setting not found, appId: ${event.appId}")
+            throw NoSuchElementException("open api setting not found, appId: ${event.appId}")
+        }
+        if (openApiSetting.isFileMode()) {
+            log.error("file mode is not supported yet, appId: ${event.appId}")
+            throw UnsupportedOperationException("file mode is not supported yet, appId: ${event.appId}")
+        }
+
+        val inputStream = openApiSetting.url!!.openStream()
+        val document = OpenApiDocument(event.appId, inputStream.readAllBytes())
+        openApiDocumentRepository.save(document)
     }
 }

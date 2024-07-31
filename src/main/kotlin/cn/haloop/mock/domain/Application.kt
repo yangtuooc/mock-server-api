@@ -55,5 +55,10 @@ open class Application : AbstractAuditable() {
     fun switchStatus() {
         enabled = !enabled
     }
+}
 
+fun application(init: Application.() -> Unit): Application {
+    val application = Application()
+    application.init()
+    return application
 }

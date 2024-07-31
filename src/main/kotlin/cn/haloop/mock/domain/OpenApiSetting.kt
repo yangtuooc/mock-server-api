@@ -82,6 +82,17 @@ open class OpenApiSetting : AbstractAuditable() {
     @Column(name = "enabled")
     open var enabled: Boolean = true
 
+    fun isFileMode(): Boolean {
+        return loadMode == LoadMode.FILE
+    }
+
+    fun update(edit: OpenApiSettingEdit) {
+        loadMode = edit.loadMode
+        url = edit.url
+        file = edit.file
+        autoUpdate = edit.autoUpdate
+        cron = edit.cron
+    }
 }
 
 fun openApiSetting(init: OpenApiSetting.() -> Unit): OpenApiSetting {

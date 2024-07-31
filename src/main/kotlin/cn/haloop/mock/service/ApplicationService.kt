@@ -1,6 +1,7 @@
 package cn.haloop.mock.service
 
 import cn.haloop.mock.domain.Application
+import cn.haloop.mock.domain.application
 import cn.haloop.mock.domain.dto.ApplicationEdit
 import cn.haloop.mock.domain.dto.OpenApiSettingEdit
 import cn.haloop.mock.domain.event.OpenApiSettingCreated
@@ -34,10 +35,11 @@ class ApplicationService(
 
 
     fun create(req: ApplicationEdit) {
-        val app = Application()
-        app.name = req.name
-        app.endpoint = req.endpoint
-        app.description = req.description
+        val app = application {
+            name = req.name
+            endpoint = req.endpoint
+            description = req.description
+        }
         appRepository.save(app)
     }
 
