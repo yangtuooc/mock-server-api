@@ -5,6 +5,7 @@ import cn.haloop.mock.domain.application
 import cn.haloop.mock.domain.dto.ApiTag
 import cn.haloop.mock.domain.dto.ApplicationEdit
 import cn.haloop.mock.domain.dto.OpenApiSettingEdit
+import cn.haloop.mock.domain.dto.SchemaModel
 import cn.haloop.mock.domain.event.OpenApiSettingCreated
 import cn.haloop.mock.domain.openApiSetting
 import cn.haloop.mock.domain.projection.ApplicationEnvironmentView
@@ -88,5 +89,9 @@ class ApplicationService(
     fun syncApiDoc(app: Application) {
         val apiSetting = app.apiSetting ?: throw IllegalArgumentException("${app.id} has no open api setting")
         openApiSettingService.sync(apiSetting)
+    }
+
+    fun getSchemaModel(app: Application, hash: String): SchemaModel {
+        return openApiService.getSchemaModel(app, hash)
     }
 }

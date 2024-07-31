@@ -3,10 +3,10 @@ import { Button } from 'antd';
 import React, { useState } from 'react';
 import { useParams } from '@@/exports';
 import HttpMethod from '@/components/HttpMethod/HttpMethod';
-import SchemaForm from '@/pages/Form/Detail/components/SchemaForm';
 import ReactJson from 'react-json-view';
-import MockSchemaForm from '@/pages/Form/Detail/components/MockSchemaForm';
 import { mockClueFormSchema } from '@/mock/mockClueFormSchema';
+import SchemaForm from '@/pages/App/Schemas/components/SchemaForm';
+import MockSchemaForm from '@/pages/App/Schemas/components/MockSchemaForm';
 
 const dataSource = {
   name: '线索创建',
@@ -19,12 +19,15 @@ const schema = mockClueFormSchema;
 
 type ApiSchemaDetailProps = {
   jsonSchema: any,
-  mockConfig: any,
+  mockSchema: any,
 }
 
 const ApiSchemaDetail = () => {
 
-  const { id } = useParams();
+  const { appId, hash } = useParams();
+  console.log('hash', hash);
+  console.log('appId', appId);
+
   const [usedJsonSchema, setUsedJsonSchema] = useState(schema);
 
   return (
@@ -66,16 +69,20 @@ const ApiSchemaDetail = () => {
 
       {/* schema */}
       <ProCard tabs={{ type: 'card' }}>
+
         <ProCard.TabPane key={'schemaForm'} tab={'表单信息'}>
           <SchemaForm jsonSchema={usedJsonSchema} />
         </ProCard.TabPane>
-        <ProCard.TabPane key={'mockConfig'} tab={'mock数据配置'}>
+
+        <ProCard.TabPane key={'mockSchema'} tab={'mock数据配置'}>
           <MockSchemaForm />
         </ProCard.TabPane>
+
         <ProCard.TabPane key={'jsonSchema'} tab={'jsonSchema'}>
           <ReactJson src={schema} onEdit={(edit) => {
             setUsedJsonSchema(edit.updated_src);
           }} />
+
         </ProCard.TabPane>
       </ProCard>
     </>

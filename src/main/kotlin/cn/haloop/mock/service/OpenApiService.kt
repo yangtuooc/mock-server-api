@@ -3,10 +3,13 @@ package cn.haloop.mock.service
 import cn.haloop.mock.domain.Application
 import cn.haloop.mock.domain.document.OpenApiDocument
 import cn.haloop.mock.domain.dto.ApiTag
+import cn.haloop.mock.domain.dto.SchemaModel
 import cn.haloop.mock.repository.OpenApiDocumentRepository
 import com.fasterxml.jackson.databind.JsonNode
 import io.swagger.v3.core.util.Json31
 import io.swagger.v3.oas.models.OpenAPI
+import io.swagger.v3.parser.OpenAPIResolver
+import io.swagger.v3.parser.core.models.ParseOptions
 import org.bson.types.Binary
 import org.springframework.stereotype.Service
 import java.net.URL
@@ -36,7 +39,11 @@ class OpenApiService(
     }
 
     private fun parse(oad: OpenApiDocument): OpenAPI {
-        return mapper.readValue(oad.document!!.data, OpenAPI::class.java)
+        val api = mapper.readValue(oad.document!!.data, OpenAPI::class.java)
+        val options = ParseOptions()
+        options.isResolve = true
+        options.isResolveFully = true
+        return OpenAPIResolver(api, null, null, null, options).resolve()
     }
 
     fun sync(app: Application, url: URL) {
@@ -44,5 +51,12 @@ class OpenApiService(
             ?: throw NoSuchElementException("open api document not found, app id: ${app.id}")
         openApiDocument.document = Binary(url.readBytes())
         openApiDocumentRepository.save(openApiDocument)
+    }
+
+    fun getSchemaModel(app: Application, hash: String): SchemaModel {
+        val openApiDocument = openApiDocumentRepository.findByAppIdIs(app.id)
+            ?: throw NoSuchElementException("open api document not found, app id: ${app.id}")
+        val openAPI = parse(openApiDocument)
+        TODO()
     }
 }

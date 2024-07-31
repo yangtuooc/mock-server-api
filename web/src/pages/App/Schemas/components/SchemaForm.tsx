@@ -1,5 +1,7 @@
 import { createForm } from '@formily/core';
 import { createSchemaField, FormProvider } from '@formily/react';
+import { useAsyncDataSource } from '@/pages/App/Schemas/components/useAsyncDataSource';
+import { transformAddress } from '@/pages/App/Schemas/components/transformAddress';
 import {
   ArrayItems,
   Cascader,
@@ -12,8 +14,7 @@ import {
   Submit,
   Switch,
 } from '@formily/antd-v5';
-import { useAsyncDataSource } from '@/pages/Form/Detail/components/useAsyncDataSource';
-import { transformAddress } from '@/pages/Form/Detail/components/transformAddress';
+
 
 type SchemaFormProps = {
   jsonSchema: any

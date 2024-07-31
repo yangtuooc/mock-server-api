@@ -4,6 +4,7 @@ import cn.haloop.mock.domain.Application
 import cn.haloop.mock.domain.dto.ApiTag
 import cn.haloop.mock.domain.dto.ApplicationEdit
 import cn.haloop.mock.domain.dto.OpenApiSettingEdit
+import cn.haloop.mock.domain.dto.SchemaModel
 import cn.haloop.mock.domain.projection.ApplicationEnvironmentView
 import cn.haloop.mock.domain.projection.ApplicationView
 import cn.haloop.mock.domain.projection.SchemaView
@@ -180,6 +181,20 @@ class ApplicationController(val svc: ApplicationService) {
     fun syncApiDoc(@Parameter(hidden = true) @PathVariable("id") app: Application): ResponseEntity<Void> {
         svc.syncApiDoc(app)
         return ResponseEntity.ok().build()
+    }
+
+    @Operation(
+        operationId = "getSchemaModel",
+        summary = "获取SchemaModel",
+        description = "获取指定接口的SchemaModel，包含表单schema和mock数据schema"
+    )
+    @GetMapping("/{id}/schema-model/{hash}")
+    fun getSchemaModel(
+        @PathVariable("id") app: Application,
+        @PathVariable("hash") hash: String
+    ): ResponseEntity<SchemaModel> {
+        val model = svc.getSchemaModel(app, hash)
+        return ResponseEntity.ok(model)
     }
 
 }

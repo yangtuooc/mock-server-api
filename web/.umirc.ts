@@ -20,7 +20,7 @@ export default defineConfig({
     {
       name: '首页',
       path: '/home',
-      menuRender: false,
+      // menuRender: false,
       component: './Home',
     },
     {
@@ -36,26 +36,10 @@ export default defineConfig({
           path: '/app/:id',
           component: './App/Detail/$id',
         },
-      ],
-    },
-    {
-      name: '表单管理',
-      path: '/schema',
-      routes: [
         {
-          name: '配置',
-          path: '/schema/config',
-          component: './Form/Config',
-        },
-        {
-          name: '列表',
-          path: '/schema/list',
-          component: './Form/List',
-        },
-        {
-          path: '/schema/:id',
-          component: './Form/Detail/$id',
-        },
+          path: '/app/:appId/schemas/:hash',
+          component: './App/Schemas/$id'
+        }
       ],
     },
     {
