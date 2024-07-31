@@ -1,11 +1,11 @@
-import CodeMirror, { EditorView, oneDark } from '@uiw/react-codemirror';
+import ReactCodeMirror, { EditorView, oneDark } from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import React, { useRef, useState } from 'react';
 import { Button } from 'antd';
 import { mentions } from '@uiw/codemirror-extensions-mentions';
 
 export type JavaScriptEditorProps = {
-  customMentions: {
+  mentionOptions: {
     label: string,
     displayLabel: string,
     value: any,
@@ -13,11 +13,11 @@ export type JavaScriptEditorProps = {
 }
 
 
-const JavaScriptEditor = ({ customMentions }: JavaScriptEditorProps) => {
+const JavaScriptEditor = ({ mentionOptions }: JavaScriptEditorProps) => {
   const editorRef = useRef(null);
   const [value, setValue] = useState('');
 
-  const variables = customMentions;
+  const variables = mentionOptions;
 
   const replaceVariables = (value: string) => {
     let result = value;
@@ -46,13 +46,13 @@ const JavaScriptEditor = ({ customMentions }: JavaScriptEditorProps) => {
 
   return (
     <div>
-      <CodeMirror
+      <ReactCodeMirror
         height="300px"
         value={value}
         theme={oneDark}
         extensions={[
           javascript({ jsx: true, typescript: true }),
-          // mentions(customMentions), // fixme: mentions is not able to be used
+          mentions(mentionOptions), // fixme: mentions is not able to be used
           EditorView.lineWrapping,
           EditorView.updateListener.of((update) => {
             if (update.docChanged) {

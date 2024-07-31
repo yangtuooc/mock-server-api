@@ -1,6 +1,7 @@
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
+  // favicons: ['assets/logo.svg'],
   antd: {
     dark: false,
   },

@@ -9,7 +9,17 @@ type AppScriptSettingsProps = {
 
 const AppScriptSettings = ({ appId }: AppScriptSettingsProps) => {
 
-  const [mentions, setMentions] = useState<JavaScriptEditorProps['customMentions']>([]);
+  const [mentionOptions, setMentionOptions] = useState<JavaScriptEditorProps['mentionOptions']>([]);
+
+  const appendMentionPrefix = (options: JavaScriptEditorProps['mentionOptions']) => {
+    return options.map((item) => {
+      return {
+        ...item,
+        label: `@${item.label}`,
+      };
+    });
+
+  };
 
   useEffect(() => {
     findApplicationEnvironments({ id: appId }).then((res) => {
@@ -20,8 +30,7 @@ const AppScriptSettings = ({ appId }: AppScriptSettingsProps) => {
           value: item.value,
         };
       });
-      console.log(mentions);
-      setMentions(mentions);
+      setMentionOptions(appendMentionPrefix(mentions));
     });
   }, [appId]);
 
@@ -33,7 +42,7 @@ const AppScriptSettings = ({ appId }: AppScriptSettingsProps) => {
       bordered
     >
       <ProCard title={'前置脚本'} headerBordered subTitle={'在请求发送之前执行'}>
-        <JavaScriptEditor customMentions={mentions} />
+        <JavaScriptEditor mentionOptions={mentionOptions} />
       </ProCard>
     </ProCard>
   );
