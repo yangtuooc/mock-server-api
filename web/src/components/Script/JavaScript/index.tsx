@@ -44,7 +44,7 @@ const JavaScriptEditor = ({ mentionOptions }: JavaScriptEditorProps) => {
         theme={oneDark}
         extensions={[
           javascript({ jsx: true, typescript: true }),
-          mentions(mentionOptions), // fixme: mentions is not able to be used
+          mentions(mentionOptions),
           EditorView.lineWrapping,
           EditorView.updateListener.of((update) => {
             if (update.docChanged) {
