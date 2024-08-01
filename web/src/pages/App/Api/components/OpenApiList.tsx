@@ -12,13 +12,6 @@ type Api = {
   description: string;
 };
 
-type OpenApiTag = {
-  id: string;
-  name: string;
-  description?: string;
-  apiList: Api[];
-}
-
 
 type OpenApiSchemaListProps = {
   appId: string,

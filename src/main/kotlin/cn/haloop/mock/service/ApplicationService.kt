@@ -87,8 +87,7 @@ class ApplicationService(
     }
 
     fun syncApiDoc(app: Application) {
-        val apiSetting = app.apiSetting ?: throw IllegalArgumentException("${app.id} has no open api setting")
-        openApiSettingService.sync(apiSetting)
+        openApiService.loadOpenApiDocument(app.id)
     }
 
     fun getSchemaModel(app: Application, hash: String): SchemaModel {

@@ -1,23 +1,21 @@
 declare namespace API {
-  type Api = {
-    /** 接口hash，根据接口的路径和方法生成，用于标识接口的唯一性 */
-    hash: string;
-    /** 接口名称 */
-    name: string;
-    /** 接口描述 */
-    description?: string;
-    /** 接口路径 */
-    path: string;
-    /** 请求方法 */
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-  };
-
   type ApiTag = {
     /** 对应openapi的tag，通常是一个controller */
     name?: string;
     /** tag的描述 */
     description?: string;
-    apiList?: Api[];
+  };
+
+  type Application = {
+    createdAt?: string;
+    updatedAt?: string;
+    id: string;
+    name?: string;
+    endpoint?: string;
+    description?: string;
+    enabled: boolean;
+    apiSetting?: OpenApiSetting;
+    environments: ApplicationEnvironment[];
   };
 
   type ApplicationEdit = {
@@ -25,6 +23,17 @@ declare namespace API {
     name: string;
     /** 应用描述 */
     description: string;
+  };
+
+  type ApplicationEnvironment = {
+    createdAt?: string;
+    updatedAt?: string;
+    id: string;
+    application?: Application;
+    name?: string;
+    value?: string;
+    desc?: string;
+    enabled: boolean;
   };
 
   type ApplicationEnvironmentView = {
@@ -47,10 +56,10 @@ declare namespace API {
     createdAt: string;
     /** 应用是否启用 */
     enabled: boolean;
-    /** 应用描述 */
-    description: string;
     /** 应用端点 */
     endpoint: string;
+    /** 应用描述 */
+    description: string;
   };
 
   type findApplicationApiListParams = {
@@ -80,7 +89,27 @@ declare namespace API {
     id: string;
   };
 
+  type getSchemaModelParams = {
+    id: Application;
+    hash: string;
+  };
+
   type JsonNode = true;
+
+  type OpenApiSetting = {
+    createdAt?: string;
+    updatedAt?: string;
+    id: string;
+    app?: Application;
+    loadMode: 'FILE' | 'URL';
+    url?: string;
+    file?: JsonNode;
+    cache?: JsonNode;
+    autoUpdate: boolean;
+    cron?: string;
+    enabled: boolean;
+    isFileMode: boolean;
+  };
 
   type OpenApiSettingEdit = {
     /** 加载模式 URL: 从URL加载, FILE: 从文件加载 */
@@ -110,6 +139,11 @@ declare namespace API {
     number?: number;
     totalElements?: number;
     totalPages?: number;
+  };
+
+  type SchemaModel = {
+    jsonSchema?: JsonNode;
+    mockSchema?: JsonNode;
   };
 
   type setOpenApiParams = {

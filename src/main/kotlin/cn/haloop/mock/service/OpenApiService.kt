@@ -4,13 +4,16 @@ import cn.haloop.mock.domain.Application
 import cn.haloop.mock.domain.document.OpenApiDocument
 import cn.haloop.mock.domain.dto.ApiTag
 import cn.haloop.mock.domain.dto.SchemaModel
+import cn.haloop.mock.extensions.asApiPathRoutes
+import cn.haloop.mock.repository.ApiPathRouteRepository
+import cn.haloop.mock.repository.ApplicationRepository
 import cn.haloop.mock.repository.OpenApiDocumentRepository
-import com.fasterxml.jackson.databind.JsonNode
 import io.swagger.v3.core.util.Json31
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.parser.OpenAPIResolver
 import io.swagger.v3.parser.core.models.ParseOptions
-import org.bson.types.Binary
+import jakarta.transaction.Transactional
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.net.URL
 
@@ -20,7 +23,11 @@ import java.net.URL
 @Service
 class OpenApiService(
     val openApiDocumentRepository: OpenApiDocumentRepository,
+    val applicationRepository: ApplicationRepository,
+    val apiPathRouteRepository: ApiPathRouteRepository,
 ) {
+
+    private val log = LoggerFactory.getLogger(OpenApiService::class.java)
 
     private val mapper = Json31.converterMapper()
 
@@ -28,14 +35,13 @@ class OpenApiService(
         return mapper.readValue(url, OpenAPI::class.java)
     }
 
-    fun getJsonSchema(openAPI: OpenAPI): JsonNode {
-        return mapper.valueToTree(openAPI)
-    }
-
     fun findOpenApiTags(app: Application): List<ApiTag> {
-        val apiDocument = openApiDocumentRepository.findByAppIdIs(app.id) ?: return emptyList()
-        val openAPI = parse(apiDocument)
-        return ApiTag.from(openAPI)
+        val routes = apiPathRouteRepository.findByAppIdIs(app.id)
+        if (routes.isEmpty()) {
+            return emptyList()
+        }
+        return routes.groupBy { it.tagName }
+            .map { ApiTag(it.key!!, it.value) }
     }
 
     private fun parse(oad: OpenApiDocument): OpenAPI {
@@ -46,17 +52,32 @@ class OpenApiService(
         return OpenAPIResolver(api, null, null, null, options).resolve()
     }
 
-    fun sync(app: Application, url: URL) {
-        val openApiDocument = openApiDocumentRepository.findByAppIdIs(app.id)
-            ?: throw NoSuchElementException("open api document not found, app id: ${app.id}")
-        openApiDocument.document = Binary(url.readBytes())
-        openApiDocumentRepository.save(openApiDocument)
-    }
 
     fun getSchemaModel(app: Application, hash: String): SchemaModel {
         val openApiDocument = openApiDocumentRepository.findByAppIdIs(app.id)
             ?: throw NoSuchElementException("open api document not found, app id: ${app.id}")
         val openAPI = parse(openApiDocument)
+
         TODO()
+    }
+
+    @Transactional(rollbackOn = [Exception::class])
+    fun loadOpenApiDocument(appId: String) {
+        val app = applicationRepository.getReferenceById(appId)
+        val openApiSetting = app.apiSetting ?: throw IllegalStateException("api setting not found, appId: $appId")
+        if (openApiSetting.isFileMode()) {
+            log.error("file mode is not supported yet, appId: $appId")
+            throw UnsupportedOperationException("file mode is not supported yet, appId: $appId")
+        }
+        val openAPI = parse(openApiSetting.url!!)
+
+        OpenApiDocument(appId, mapper.writeValueAsBytes(openAPI)).let {
+            openApiDocumentRepository.save(it)
+        }
+        val apiPathRoutes = openAPI.asApiPathRoutes()
+        apiPathRoutes.forEach {
+            it.appId = app.id
+        }
+        apiPathRouteRepository.saveAll(apiPathRoutes)
     }
 }

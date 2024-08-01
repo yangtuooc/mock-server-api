@@ -23,7 +23,15 @@ class OpenApiTest {
     }
 
     @Test
-    fun invalid() {
+    fun group() {
+        val options = ParseOptions()
+        options.isResolve = true
+        options.isResolveFully = true // resolve schema references
 
+        val parsed = OpenAPIV3Parser().read("openapi.json", null, options)
+        parsed.paths.forEach { (path, pathItem) ->
+            println("path: $path, pathItem: $pathItem")
+        }
     }
+
 }

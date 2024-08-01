@@ -1,10 +1,8 @@
 package cn.haloop.mock.domain.dto
 
 import cn.haloop.mock.domain.HttpMethod
+import cn.haloop.mock.domain.document.ApiPathRoute
 import io.swagger.v3.oas.annotations.media.Schema
-import io.swagger.v3.oas.models.OpenAPI
-import io.swagger.v3.oas.models.Operation
-import java.security.MessageDigest
 
 /**
  * api接口文档
@@ -21,38 +19,19 @@ class ApiTag {
 
     var apiList: List<Api>? = null
 
-    companion object {
-        fun from(openAPI: OpenAPI): List<ApiTag> {
-            return openAPI.tags.map { tag ->
-                ApiTag().apply {
-                    name = tag.name
-                    description = tag.description
-                    apiList = openAPI.paths.flatMap { (path, pathItem) ->
-                        listOfNotNull(
-                            createApi(path, pathItem.get, HttpMethod.GET, tag.name),
-                            createApi(path, pathItem.post, HttpMethod.POST, tag.name),
-                            createApi(path, pathItem.put, HttpMethod.PUT, tag.name),
-                            createApi(path, pathItem.delete, HttpMethod.DELETE, tag.name)
-                        )
-                    }
-                }
-            }
-        }
+    constructor()
 
-        private fun createApi(path: String, operation: Operation?, method: HttpMethod, tagName: String): Api? {
-            return operation?.takeIf { it.tags?.contains(tagName) == true }?.let {
-                Api().apply {
-                    this.hash = hash("$path-$method")
-                    this.path = path
-                    this.name = it.summary
-                    this.method = method
-                    this.description = it.description
-                }
-            }
-        }
-
-        private fun hash(str: String): String {
-            return MessageDigest.getInstance("SHA-1").digest(str.toByteArray()).joinToString("") { "%02x".format(it) }
+    constructor(key: String, value: List<ApiPathRoute>) {
+        this.name = key
+        this.description = value.first().tagDescription
+        this.apiList = value.map {
+            val api = Api()
+            api.hash = it.id
+            api.name = it.name
+            api.description = it.description
+            api.path = it.path
+            api.method = it.method
+            api
         }
     }
 }
