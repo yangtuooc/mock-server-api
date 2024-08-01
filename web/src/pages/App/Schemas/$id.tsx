@@ -1,12 +1,12 @@
 import { ProCard, ProDescriptions } from '@ant-design/pro-components';
-import { Button } from 'antd';
-import React, { useState } from 'react';
-import { useParams } from '@@/exports';
+import { Button, message } from 'antd';
+import React, { useEffect, useState } from 'react';
 import HttpMethod from '@/components/HttpMethod/HttpMethod';
 import ReactJson from 'react-json-view';
-import { mockClueFormSchema } from '@/mock/mockClueFormSchema';
 import SchemaForm from '@/pages/App/Schemas/components/SchemaForm';
 import MockSchemaForm from '@/pages/App/Schemas/components/MockSchemaForm';
+import { useParams } from '@@/exports';
+import { getSchemaModel } from '@/services/api/pathRoute';
 
 const dataSource = {
   name: '线索创建',
@@ -15,20 +15,21 @@ const dataSource = {
   description: '提交一条用户信息，返回线索id',
 };
 
-const schema = mockClueFormSchema;
-
-type ApiSchemaDetailProps = {
-  jsonSchema: any,
-  mockSchema: any,
-}
-
 const ApiSchemaDetail = () => {
 
-  const { appId, hash } = useParams();
-  console.log('hash', hash);
-  console.log('appId', appId);
+  const { hash } = useParams();
+  const [usedJsonSchema, setUsedJsonSchema] = useState({});
+  const [mockSchema, setMockSchema] = useState({});
 
-  const [usedJsonSchema, setUsedJsonSchema] = useState(schema);
+  useEffect(() => {
+    getSchemaModel({ id: hash }).then((res) => {
+      setUsedJsonSchema(res.jsonSchema);
+    }).catch((err) => {
+      console.error(err);
+      return message.error('获取数据失败: ' + err);
+    });
+  }, [hash]);
+
 
   return (
     <>
@@ -79,7 +80,7 @@ const ApiSchemaDetail = () => {
         </ProCard.TabPane>
 
         <ProCard.TabPane key={'jsonSchema'} tab={'jsonSchema'}>
-          <ReactJson src={schema} onEdit={(edit) => {
+          <ReactJson src={usedJsonSchema} onEdit={(edit) => {
             setUsedJsonSchema(edit.updated_src);
           }} />
 

@@ -47,10 +47,10 @@ declare namespace API {
     createdAt: string;
     /** 应用是否启用 */
     enabled: boolean;
-    /** 应用端点 */
-    endpoint: string;
     /** 应用描述 */
     description: string;
+    /** 应用端点 */
+    endpoint: string;
   };
 
   type findApplicationApiListParams = {

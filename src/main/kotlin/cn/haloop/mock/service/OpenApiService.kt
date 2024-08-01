@@ -14,6 +14,7 @@ import io.swagger.v3.core.util.Json31
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.Operation
 import io.swagger.v3.parser.OpenAPIResolver
+import io.swagger.v3.parser.OpenAPIV3Parser
 import io.swagger.v3.parser.core.models.ParseOptions
 import jakarta.transaction.Transactional
 import org.slf4j.LoggerFactory
@@ -35,7 +36,11 @@ class OpenApiService(
     private val mapper = Json31.converterMapper()
 
     fun parse(url: URL): OpenAPI {
-        return mapper.readValue(url, OpenAPI::class.java)
+        val options = ParseOptions().apply {
+            isResolve = true
+            isResolveFully = true
+        }
+        return OpenAPIV3Parser().read(url.toString(), null, options)
     }
 
     fun findOpenApiTags(app: Application): List<ApiTag> {

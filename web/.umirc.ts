@@ -36,10 +36,15 @@ export default defineConfig({
           path: '/app/:id',
           component: './App/Detail/$id',
         },
+      ],
+    },
+    {
+      path: '/schemas',
+      routes: [
         {
-          path: '/app/:appId/schemas/:hash',
-          component: './App/Schemas/$id'
-        }
+          path: '/schemas/:hash',
+          component: './App/Schemas/$id',
+        },
       ],
     },
     {

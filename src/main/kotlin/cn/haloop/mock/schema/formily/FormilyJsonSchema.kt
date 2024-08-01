@@ -40,6 +40,11 @@ class FormilyJsonSchema(schema: Schema<*>) : Schema<Any>() {
     }
 
     private fun decorate() {
+        this.properties?.forEach { (key, value) ->
+            if (value is Schema<*>) {
+                this.properties[key] = FormilyJsonSchema(value)
+            }
+        }
         when (this.type) {
             "string" -> {
                 this.addExtension("x-component", "Input")
@@ -47,12 +52,12 @@ class FormilyJsonSchema(schema: Schema<*>) : Schema<Any>() {
             }
 
             "number" -> {
-                this.addExtension("x-component", "InputNumber")
+                this.addExtension("x-component", "NumberPicker")
                 this.addExtension("x-decorator", "FormItem")
             }
 
             "integer" -> {
-                this.addExtension("x-component", "InputNumber")
+                this.addExtension("x-component", "NumberPicker")
                 this.addExtension("x-decorator", "FormItem")
             }
 

@@ -60,7 +60,7 @@ const OpenApiList = ({ appId, tags }: OpenApiSchemaListProps) => {
                     actions: {
                       render: (text, record) => [
                         <Button key="go" type="primary" onClick={() => {
-                          navigate(`/app/${appId}/schemas/${record.hash}`);
+                          navigate(`/schemas/${record.hash}`);
                         }}>Go</Button>,
                       ],
                     },
