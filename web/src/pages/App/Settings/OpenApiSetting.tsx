@@ -19,6 +19,8 @@ const OpenApiSetting: React.FC<OpenApiSettingProps> = ({ appId }) => {
   const syncOpenApi = (appId: string) => {
     syncApiDoc({ id: appId }).then(() => {
       return message.success('同步成功');
+    }).catch((err) => {
+      return message.error('同步失败: ' + err);
     });
   };
 

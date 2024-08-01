@@ -5,11 +5,14 @@ import cn.haloop.mock.domain.document.OpenApiDocument
 import cn.haloop.mock.domain.dto.ApiTag
 import cn.haloop.mock.domain.dto.SchemaModel
 import cn.haloop.mock.extensions.asApiPathRoutes
+import cn.haloop.mock.extensions.getSchema
 import cn.haloop.mock.repository.ApiPathRouteRepository
 import cn.haloop.mock.repository.ApplicationRepository
 import cn.haloop.mock.repository.OpenApiDocumentRepository
+import cn.haloop.mock.schema.formily.FormilyJsonSchema
 import io.swagger.v3.core.util.Json31
 import io.swagger.v3.oas.models.OpenAPI
+import io.swagger.v3.oas.models.Operation
 import io.swagger.v3.parser.OpenAPIResolver
 import io.swagger.v3.parser.core.models.ParseOptions
 import jakarta.transaction.Transactional
@@ -53,12 +56,14 @@ class OpenApiService(
     }
 
 
-    fun getSchemaModel(app: Application, hash: String): SchemaModel {
-        val openApiDocument = openApiDocumentRepository.findByAppIdIs(app.id)
-            ?: throw NoSuchElementException("open api document not found, app id: ${app.id}")
-        val openAPI = parse(openApiDocument)
-
-        TODO()
+    fun getSchemaModel(hash: String): SchemaModel {
+        val route = apiPathRouteRepository.findById(hash)
+            .orElseThrow { throw IllegalArgumentException("path route not found, hash: $hash") }
+        val operation = mapper.readValue(route.operation!!.data, Operation::class.java)
+        val openApiSchema = operation.getSchema(route.method!!)
+        return SchemaModel().apply {
+            jsonSchema = mapper.valueToTree(FormilyJsonSchema(openApiSchema))
+        }
     }
 
     @Transactional(rollbackOn = [Exception::class])

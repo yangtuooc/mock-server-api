@@ -7,6 +7,7 @@ import io.swagger.v3.core.util.Json31
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.Operation
 import io.swagger.v3.oas.models.PathItem
+import io.swagger.v3.oas.models.media.Schema
 import io.swagger.v3.oas.models.tags.Tag
 import org.bson.types.Binary
 import java.security.MessageDigest
@@ -35,6 +36,15 @@ fun OpenAPI.getTag(tagName: String): Tag {
 
 private fun Operation.toBinary(): ByteArray {
     return Json31.mapper().writeValueAsBytes(this)
+}
+
+fun Operation.getSchema(method: HttpMethod): Schema<*> {
+    return when (method) {
+        HttpMethod.GET -> this.parameters.first().schema
+        HttpMethod.POST -> this.requestBody.content.values.first().schema
+        HttpMethod.PUT -> this.requestBody.content.values.first().schema
+        HttpMethod.DELETE -> this.parameters.first().schema
+    } ?: throw IllegalArgumentException("unknown method")
 }
 
 private fun PathItem.operation(method: HttpMethod): Operation {

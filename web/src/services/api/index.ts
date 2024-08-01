@@ -4,7 +4,9 @@
 // API 唯一标识：
 import * as openApiSetting from './openApiSetting';
 import * as application from './application';
+import * as pathRouteController from './pathRouteController';
 export default {
   openApiSetting,
   application,
+  pathRouteController,
 };

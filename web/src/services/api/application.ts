@@ -120,20 +120,6 @@ export async function setOpenApi(
   });
 }
 
-/** 获取SchemaModel 获取指定接口的SchemaModel，包含表单schema和mock数据schema GET /applications/${param0}/schema-model/${param1} */
-export async function getSchemaModel(
-  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getSchemaModelParams,
-  options?: { [key: string]: any },
-) {
-  const { id: param0, hash: param1, ...queryParams } = params;
-  return request<API.SchemaModel>(`${/api/}/applications/${param0}/schema-model/${param1}`, {
-    method: 'GET',
-    params: { ...queryParams },
-    ...(options || {}),
-  });
-}
-
 /** 查询应用Schema 查询应用Schema列表 GET /applications/${param0}/schemas */
 export async function findApplicationSchemas(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
